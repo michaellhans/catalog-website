@@ -30,13 +30,13 @@ yang akan Anda implementasikan. Berikut ini adalah header-header atribut dalam d
 - Instrumen
 
 Instrumen sendiri terdiri atas:<br>
-P = piano<br>
-G = guitar<br>
-S = string<br>
-B = brass<br>
-W = wood wind<br>
-s = saxophone<br>
-p = percussion<br>
+- P = piano<br>
+- G = guitar<br>
+- S = string<br>
+- B = brass<br>
+- W = wood wind<br>
+- s = saxophone<br>
+- p = percussion<br>
 
 Berikut ini adalah contoh sebuah data yang akan dimasukkan ke dalam database.
 | Nama Lagu | Jenis Aransemen  | Hardcopy  | Softcopy | Instrumen |
