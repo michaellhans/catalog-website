@@ -19,6 +19,8 @@ Filter berfungsi sebagai tempat untuk melakukan pencarian menggunakan filter-fil
 - <b>F3 - Add New Book</b><br>
 Add New Book berfungsi sebagai bagian dari website untuk menambahkan buku ke dalam database website.
 Penambahan buku membutuhkan *key* khusus yang hanya diketahui oleh Librarian itu sendiri.
+- <b>F4 - Navigation Bar Book / Songs</b><br>
+Navigation Bar Book / Songs berfungsi sebagai pergantian halaman dari halaman pencarian buku ke halaman pencarian lagu.
 
 ### Database for Website
 Database berfungsi sebagai tempat penyimpanan informasi dalam jumlah yang besar. Pada kesempatan ini, Anda telah diberikan header-header sebagai atribut dalam database
