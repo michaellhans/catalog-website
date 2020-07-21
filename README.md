@@ -30,11 +30,19 @@ yang akan Anda implementasikan. Berikut ini adalah daftar tabel dalam database:
 - Softcopy
 - Instrumen
 
+| Nama Lagu | Kode Buku  | Hardcopy  | Softcopy | Instrumen |
+| --------- | ---------- | --------- | -------- | --------- |
+| Song Name | GSB01      | yes       | yes      | GSB       |
+
 2. Daftar_Lagu
 - Nama Lagu / Buku
 - Jenis Aransemen
 - Klasik / Non-Klasik
 - Instrumen
+
+| Nama Lagu | Jenis Aransemen  | Klasik    | Instrumen |
+| --------- | ---------------- | --------- | --------- |
+| Song Name | GSB01            | no        | GSB       |
 
 Instrumen sendiri terdiri atas:<br>
 - P = piano<br>
@@ -44,17 +52,6 @@ Instrumen sendiri terdiri atas:<br>
 - W = wood wind<br>
 - s = saxophone<br>
 - p = percussion<br>
-
-Berikut ini adalah contoh sebuah data yang akan dimasukkan ke dalam tabel Daftar Buku dan Daftar Lagu.
-1. Daftar_Buku
-| Nama Lagu | Kode Buku  | Hardcopy  | Softcopy | Instrumen |
-| --------- | ---------- | --------- | -------- | --------- |
-| Song Name | GSB01      | yes       | yes      | GSB       |
-
-2. Daftar_Lagu
-| Nama Lagu | Jenis Aransemen  | Klasik    | Instrumen |
-| --------- | ---------------- | --------- | --------- |
-| Song Name | GSB01            | no        | GSB       |
 
 ### Framework Website
 Framework yang akan digunakan dalam pembuatan website adalah Vue.js
