@@ -24,25 +24,29 @@ Penambahan buku membutuhkan *key* khusus yang hanya diketahui oleh Librarian itu
 Database berfungsi sebagai tempat penyimpanan informasi dalam jumlah yang besar. Pada kesempatan ini, Anda telah diberikan header-header sebagai atribut dalam database
 yang akan Anda implementasikan. Berikut ini adalah daftar tabel dalam database:
 1. Daftar_Buku
-- Nama Lagu / Buku
-- Kode Buku
-- Hardcopy
-- Softcopy
-- Instrumen
 
 | Nama Lagu | Kode Buku  | Hardcopy  | Softcopy | Instrumen |
 | --------- | ---------- | --------- | -------- | --------- |
 | Song Name | GSB01      | yes       | yes      | GSB       |
 
+- Nama Lagu / Buku (STRING)
+- Kode Buku (STRING)
+- Hardcopy (BOOLEAN)
+- Softcopy (BOOLEAN)
+- Instrumen (STRING)
+
+
+
 2. Daftar_Lagu
-- Nama Lagu / Buku
-- Jenis Aransemen
-- Klasik / Non-Klasik
-- Instrumen
 
 | Nama Lagu | Jenis Aransemen  | Klasik    | Instrumen |
 | --------- | ---------------- | --------- | --------- |
 | Song Name | GSB01            | no        | GSB       |
+
+- Nama Lagu / Buku (STRING)
+- Jenis Aransemen (STRING)
+- Klasik / Non-Klasik (BOOLEAN)
+- Instrumen (STRING)
 
 Instrumen sendiri terdiri atas:<br>
 - P = piano<br>
