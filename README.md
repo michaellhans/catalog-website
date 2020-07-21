@@ -12,11 +12,11 @@ Pada project kali ini, Anda akan mengimplementasikan suatu website yang terinteg
 
 ### Fungsionalitas Website
 Berikut ini adalah fungsionalitas-fungsionalitas yang diharapkan akan ada pada Book Finder tersebut.
-- <b>F1 - Search Bar
+- <b>F1 - Search Bar</b><br>
 Search Bar berfungsi sebagai tempat mengisi query pencarian buku yang diinginkan.
-- <b>F2 - Filter</b>
+- <b>F2 - Filter</b><br>
 Filter berfungsi sebagai tempat untuk melakukan pencarian menggunakan filter-filter tertentu
-- <b>F3 - Add New Book</b>
+- <b>F3 - Add New Book</b><br>
 Add New Book berfungsi sebagai bagian dari website untuk menambahkan buku ke dalam database website.
 Penambahan buku membutuhkan *key* khusus yang hanya diketahui oleh Librarian itu sendiri.
 
