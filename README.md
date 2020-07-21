@@ -22,11 +22,18 @@ Penambahan buku membutuhkan *key* khusus yang hanya diketahui oleh Librarian itu
 
 ### Database for Website
 Database berfungsi sebagai tempat penyimpanan informasi dalam jumlah yang besar. Pada kesempatan ini, Anda telah diberikan header-header sebagai atribut dalam database
-yang akan Anda implementasikan. Berikut ini adalah header-header atribut dalam database
+yang akan Anda implementasikan. Berikut ini adalah daftar tabel dalam database:
+1. Daftar_Buku
 - Nama Lagu / Buku
-- Jenis Aransemen
+- Kode Buku
 - Hardcopy
 - Softcopy
+- Instrumen
+
+2. Daftar_Lagu
+- Nama Lagu / Buku
+- Jenis Aransemen
+- Klasik / Non-Klasik
 - Instrumen
 
 Instrumen sendiri terdiri atas:<br>
@@ -38,10 +45,16 @@ Instrumen sendiri terdiri atas:<br>
 - s = saxophone<br>
 - p = percussion<br>
 
-Berikut ini adalah contoh sebuah data yang akan dimasukkan ke dalam database.
-| Nama Lagu | Jenis Aransemen  | Hardcopy  | Softcopy | Instrumen |
-| --------- | ---------------- | --------- | -------- | --------- |
-| Song Name | Aransemen ISO    | yes       | yes      | GSBwp     |
+Berikut ini adalah contoh sebuah data yang akan dimasukkan ke dalam tabel Daftar Buku dan Daftar Lagu.
+1. Daftar_Buku
+| Nama Lagu | Kode Buku  | Hardcopy  | Softcopy | Instrumen |
+| --------- | ---------- | --------- | -------- | --------- |
+| Song Name | GSB01      | yes       | yes      | GSB       |
+
+2. Daftar_Lagu
+| Nama Lagu | Jenis Aransemen  | Klasik    | Instrumen |
+| --------- | ---------------- | --------- | --------- |
+| Song Name | GSB01            | no        | GSB       |
 
 ### Framework Website
 Framework yang akan digunakan dalam pembuatan website adalah Vue.js
