@@ -11,14 +11,14 @@ adalah agar Book Finder ini bisa terus berkembang menjadi lebih baik dari waktu 
 Pada project kali ini, Anda akan mengimplementasikan suatu website yang terintegrasi dengan database sebagai penampung informasi buku atau katalog.
 
 ### Fungsionalitas Website
-Berikut ini adalah fungsionalitas-fungsionalitas yang diharapkan akan ada pada Book Finder tersebut.
-<b>1. F1 - Search Bar</b>
-Search Bar berfungsi sebagai tempat mengisi query pencarian buku yang diinginkan.
-<b>2. F2 - Filter</b>
-Filter berfungsi sebagai tempat untuk melakukan pencarian menggunakan filter-filter tertentu
-<b>3. F3 - Add New Book</b>
-Add New Book berfungsi sebagai bagian dari website untuk menambahkan buku ke dalam database website.
-Penambahan buku membutuhkan *key* khusus yang hanya diketahui oleh Librarian itu sendiri.
+Berikut ini adalah fungsionalitas-fungsionalitas yang diharapkan akan ada pada Book Finder tersebut.<br>
+<b>1. F1 - Search Bar</b><br>
+Search Bar berfungsi sebagai tempat mengisi query pencarian buku yang diinginkan.<br>
+<b>2. F2 - Filter</b><br>
+Filter berfungsi sebagai tempat untuk melakukan pencarian menggunakan filter-filter tertentu<br>
+<b>3. F3 - Add New Book</b><br>
+Add New Book berfungsi sebagai bagian dari website untuk menambahkan buku ke dalam database website.<br>
+Penambahan buku membutuhkan *key* khusus yang hanya diketahui oleh Librarian itu sendiri.<br>
 
 ### Database for Website
 Database berfungsi sebagai tempat penyimpanan informasi dalam jumlah yang besar. Pada kesempatan ini, Anda telah diberikan header-header sebagai atribut dalam database
@@ -29,16 +29,16 @@ yang akan Anda implementasikan. Berikut ini adalah header-header atribut dalam d
 - Softcopy
 - Instrumen
 
-Instrumen sendiri terdiri atas:
-P = piano
-G = guitar
-S = string
-B = brass
-W = wood wind
-s = saxophone
-p = percussion
+Instrumen sendiri terdiri atas:<br>
+P = piano<br>
+G = guitar<br>
+S = string<br>
+B = brass<br>
+W = wood wind<br>
+s = saxophone<br>
+p = percussion<br>
 
-Sebagai contoh
+Berikut ini adalah contoh sebuah data yang akan dimasukkan ke dalam database.
 | Nama Lagu | Jenis Aransemen  | Hardcopy  | Softcopy | Instrumen |
 | --------- | ---------------- | --------- | -------- | --------- |
 | Song Name | Aransemen ISO    | yes       | yes      | GSBwp     |
@@ -58,6 +58,9 @@ Berikut ini adalah referensi pengerjaan project yang kiranya bermanfaat dalam pe
 2. [Full Stack Web App using Vue.js & Express.js: Part 1 - Intro](https://www.youtube.com/watch?v=Fa4cRMaTDUI)
 3. [Full Stack Web App using Vue.js & Express.js: Part 6 - Search](https://www.youtube.com/watch?v=ipYlztBRpp0)
 3. [How to Deploy a Vue CLI 3 Application to Heroku](https://www.youtube.com/watch?v=yfW9knTBR90)
+
+## Catatan
+Spesifikasi website *sewaktu-waktu* dapat berubah sesuai dengan masukan dari contributor atau user.
 
 ## Akhir Kata
 Akhir Kata, semoga project ini dapat terwujudkan dengan baik. Amin.
