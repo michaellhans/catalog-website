@@ -11,14 +11,14 @@ adalah agar Book Finder ini bisa terus berkembang menjadi lebih baik dari waktu 
 Pada project kali ini, Anda akan mengimplementasikan suatu website yang terintegrasi dengan database sebagai penampung informasi buku atau katalog.
 
 ### Fungsionalitas Website
-Berikut ini adalah fungsionalitas-fungsionalitas yang diharapkan akan ada pada Book Finder tersebut.<br>
-<b>1. F1 - Search Bar</b><br>
-Search Bar berfungsi sebagai tempat mengisi query pencarian buku yang diinginkan.<br>
-<b>2. F2 - Filter</b><br>
-Filter berfungsi sebagai tempat untuk melakukan pencarian menggunakan filter-filter tertentu<br>
-<b>3. F3 - Add New Book</b><br>
-Add New Book berfungsi sebagai bagian dari website untuk menambahkan buku ke dalam database website.<br>
-Penambahan buku membutuhkan *key* khusus yang hanya diketahui oleh Librarian itu sendiri.<br>
+Berikut ini adalah fungsionalitas-fungsionalitas yang diharapkan akan ada pada Book Finder tersebut.
+- <b>F1 - Search Bar
+Search Bar berfungsi sebagai tempat mengisi query pencarian buku yang diinginkan.
+- <b>F2 - Filter</b>
+Filter berfungsi sebagai tempat untuk melakukan pencarian menggunakan filter-filter tertentu
+- <b>F3 - Add New Book</b>
+Add New Book berfungsi sebagai bagian dari website untuk menambahkan buku ke dalam database website.
+Penambahan buku membutuhkan *key* khusus yang hanya diketahui oleh Librarian itu sendiri.
 
 ### Database for Website
 Database berfungsi sebagai tempat penyimpanan informasi dalam jumlah yang besar. Pada kesempatan ini, Anda telah diberikan header-header sebagai atribut dalam database
