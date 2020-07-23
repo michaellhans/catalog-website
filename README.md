@@ -27,7 +27,7 @@ Database berfungsi sebagai tempat penyimpanan informasi dalam jumlah yang besar.
 yang akan Anda implementasikan. Berikut ini adalah daftar tabel dalam database:
 1. Daftar_Buku
 
-| Nama Lagu | Kode Buku  | Hardcopy  | Softcopy | Instrumen |
+| Nama Buku | Kode Buku  | Hardcopy  | Softcopy | Instrumen |
 | --------- | ---------- | --------- | -------- | --------- |
 | Song Name | GSB01      | yes       | yes      | GSB       |
 
@@ -38,17 +38,23 @@ yang akan Anda implementasikan. Berikut ini adalah daftar tabel dalam database:
 - Instrumen (STRING)
 
 
-
 2. Daftar_Lagu
 
 | Nama Lagu | Jenis Aransemen  | Klasik    | Instrumen |
 | --------- | ---------------- | --------- | --------- |
-| Song Name | GSB01            | no        | GSB       |
+| Song Name | Aransemen ISO    | no        | GSB       |
 
 - Nama Lagu / Buku (STRING)
 - Jenis Aransemen (STRING)
 - Klasik / Non-Klasik (BOOLEAN)
 - Instrumen (STRING)
+
+Jenis Aransemen terbagi menjadi 5 bagian, yaitu:<br>
+- Aransemen ISO
+- Aransemen Non-ISO
+- Komposisi ISO
+- Komposisi Non-ISO
+- Job
 
 Instrumen sendiri terdiri atas:<br>
 - P = piano<br>
