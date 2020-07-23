@@ -1,56 +1,70 @@
 <template>
   <div id="BooksPage">
     <h1><p style="text-align=left">ISO Book Finder</p></h1>
-    <SearchBar />
-    <br>
     <b-container>
-    <div class="row">
+    <div class="row" id="row-1">
+      <div class="column" id="cols-1-search">
+        <input class="form-control mr-sm-2 inline" v-model="query" type="search" placeholder="Search" aria-label="Search" size="120">
+      </div>
+      <div class="column" id="cols-2-search">
+        <button class="btn btn-outline-success my-2 my-sm-0" @click="execute" type="submit">Search</button>
+      </div>
+    </div>
+    <br>
+    <div class="row" id="row-2">
       <div class="column" id="cols-1">
-        <select class="form-control-inline" id=kind>
+        <select class="form-control-inline" id=kind v-model="searchBy">
           <option value="Nama Buku">Nama Buku</option>
           <option value="Kode Buku">Kode Buku</option>
         </select>
       </div>
       <div class="column" id="cols-2">
         <div class="form-check-inline">
-          <input class="form-check-input" type="checkbox" name="SoftcopyCheck" id="SoftcopyCheck" value="Softcopy" checked>
+          <input class="form-check-input" type="checkbox" v-model="copyCondition" name="SoftcopyCheck" id="SoftcopyCheck" value="Softcopy" checked>
           <label class="form-check-label" for="SoftcopyCheck">Softcopy</label>
         </div>
         <div class="form-check-inline">
-          <input class="form-check-input" type="checkbox" name="HardcopyCheck" id="HardcopyCheck" value="Hardcopy">
+          <input class="form-check-input" type="checkbox" v-model="copyCondition" name="HardcopyCheck" id="HardcopyCheck" value="Hardcopy">
           <label class="form-check-label" for="HardcopyCheck">Hardcopy</label>
         </div>
       </div>
       <div class="column" id="cols-3">
         <div class="form-check-inline">
-          <input class="form-check-input" type="checkbox" value="P" id="PianoCheck">
+          <input class="form-check-input" type="checkbox" v-model="instrument" value="P" id="PianoCheck">
           <label class="form-check-label" for="PianoCheck">Piano</label>
         </div>
         <div class="form-check-inline">
-          <input class="form-check-input" type="checkbox" value="G" id="GuitarCheck">
+          <input class="form-check-input" type="checkbox" v-model="instrument" value="G" id="GuitarCheck">
           <label class="form-check-label" for="GuitarCheck">Guitar</label>
         </div>
         <div class="form-check-inline">
-          <input class="form-check-input" type="checkbox" value="S" id="StringCheck">
+          <input class="form-check-input" type="checkbox" v-model="instrument" value="S" id="StringCheck">
           <label class="form-check-label" for="StringCheck">String</label>
         </div>
         <div class="form-check-inline">
-          <input class="form-check-input" type="checkbox" value="B" id="BrassCheck">
+          <input class="form-check-input" type="checkbox" v-model="instrument" value="B" id="BrassCheck">
           <label class="form-check-label" for="BrassCheck">Brass</label>
         </div>
         <div class="form-check-inline">
-          <input class="form-check-input" type="checkbox" value="W" id="WindCheck">
+          <input class="form-check-input" type="checkbox" v-model="instrument" value="W" id="WindCheck">
           <label class="form-check-label" for="WindCheck">Wood Wind</label>
         </div>
         <div class="form-check-inline">
-          <input class="form-check-input" type="checkbox" value="s" id="SaxoCheck">
+          <input class="form-check-input" type="checkbox" v-model="instrument" value="s" id="SaxoCheck">
           <label class="form-check-label" for="SaxoCheck">Saxophone</label>
         </div>
         <div class="form-check-inline">
-          <input class="form-check-input" type="checkbox" value="p" id="PercussionCheck">
+          <input class="form-check-input" type="checkbox" v-model="instrument" value="p" id="PercussionCheck">
           <label class="form-check-label" for="PercussionCheck">Percussion</label>
         </div>
+        <div class="form-check-inline">
+          <input class="form-check-input" type="checkbox" v-model="instrument" value="L" id="LainLainCheck">
+          <label class="form-check-label" for="LainLainCheck">Lain-lain</label>
+        </div>
       </div>
+    </div>
+    <div v-if="this.clicked === true">
+      <Result :query="this.query" :instrument="this.instrument" :copyCondition="this.copyCondition" :choice="this.searchBy" />
     </div>
     </b-container>
   </div>
@@ -58,10 +72,26 @@
 
 <script>
 import SearchBar from '@/components/SearchBar'
+import Result from '@/components/BookResult'
 
 export default {
   components : {
-    SearchBar
+    SearchBar,
+    Result
+  },
+  data: function () {
+    return {
+      clicked: false,
+      query: '',
+      instrument: [],
+      copyCondition: [],
+      searchBy: ''
+    }
+  },
+  methods: {
+    execute () {
+      this.clicked = true
+    }
   }
 }
 </script>
@@ -76,23 +106,31 @@ export default {
   margin-top: 20px;
 }
 
+#cols-1-search {
+  width: 90%;
+}
+
+#cols-2-search {
+  width: 10%;
+}
+
 #cols-1 {
-  width: 20%;
+  width: 13%;
 }
 
 #cols-2 {
-  width: 20%;
+  width: 19%;
 }
 
 #cols-3 {
-  width: 60%;
+  width: 68%;
 }
 
 #kind {
-  width: 200px;
+  width: 130px;
 }
 
-.row {
+#row-2 {
   background-color: rgb(247, 243, 243);
   padding: 10px;
 }

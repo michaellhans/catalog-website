@@ -10,12 +10,24 @@
     <!-- If the prerequisites attributes meet the requirement -->
     <div v-if="this.validity === true && this.isClicked === true">
         <b-alert show variant="success" style="margin-top : 20px; margin-bottom : 20px;"><b>Kode unik yang dimasukkan valid!</b></b-alert>
-        <RegistrationBooks />
+        <div class="card">
+          <div class="card-header">
+            <button class="btn btn-primary my-2 my-sm-0 btn-radius" id="booksLayout" @click="changeForm(false)" type="submit">Books</button>
+            <button class="btn btn-primary my-2 my-sm-0 btn-radius" id="songsLayout" @click="changeForm(true)" type="submit">Songs</button>
+          </div>
+          <div class="card-body">
+            <div v-if="this.formBool == false">
+              <RegistrationBooks />
+            </div>
+            <div v-else>
+              <RegistrationSongs />
+            </div>
+          </div>
+        </div>
     </div>
     <!-- Everything else, the input is not valid -->
     <div v-else-if="this.isClicked === true">
         <b-alert show variant="danger" style="margin-top : 20px; margin-bottom : 20px;"><b>Kode unik yang dimasukkan tidak valid!</b></b-alert>
-        <RegistrationSongs />
     </div>
   </div>
   </b-container>
@@ -35,6 +47,7 @@ export default {
       uniqueKey: '',
       isClicked: false,
       validity: false,
+      formBool: false
     }
   },
   methods: {
@@ -46,6 +59,9 @@ export default {
       else {
         this.validity = false
       }
+    },
+    changeForm (formBool) {
+      this.formBool = formBool
     }
   }
 }
@@ -61,4 +77,7 @@ export default {
   margin-top: 20px;
 }
 
+#booksLayout {
+  margin-right: 30px;
+}
 </style>

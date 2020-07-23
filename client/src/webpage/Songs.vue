@@ -1,9 +1,12 @@
 <template>
   <div id="SongsPage">
     <h1><p style="text-align=left">ISO Song Finder</p></h1>
-    <SearchBar />
-    <br>
     <b-container>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2 inline" type="search" placeholder="Search" aria-label="Search" size="120">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <br>
     <div class="row">
       <div class="column" id="cols-1">
         <select class="form-control-inline" id=kind width="20">
@@ -56,16 +59,35 @@
         </div>
       </div>
     </div>
+    <b-table striped hover :items="currentStep" style="white-space:pre-wrap; word-wrap:break-word"></b-table>
+    <!-- If the button pressed, show the sorting result -->
+    <div v-if="this.clicked === true">
+      <Result :query="query" :choice="true" />
+    </div>
     </b-container>
   </div>
 </template>
 
 <script>
 import SearchBar from '@/components/SearchBar'
+import Result from '@/components/BookResult'
 
 export default {
   components : {
-    SearchBar
+    SearchBar,
+    Result
+  },
+  // Container for arrayInput from input box, process boolean, and charArray
+  data: function () {
+    return {
+      query: '',
+      clicked: false
+    }
+  },
+  methods: {
+    execute () {
+      this.clicked = true
+    }
   }
 }
 </script>
