@@ -19,7 +19,14 @@ const bookSchema = new mongoose.Schema({
   },
   instrumen: {
     type: String,
-    required: [true, getRequiredMessage("instrumen")]
+    required: [true, getRequiredMessage("instrumen")],
+    validate: {
+      validator: function(val) {
+        const re = /^(P?G?S?B?W?s?p?){1}$/g
+        return re.test(val);
+      },
+      message: "String format for instrument is not valid"
+    }
   }
 })
 

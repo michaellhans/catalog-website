@@ -24,9 +24,14 @@ router.post('/', async (req, res) => {
 
   book.save().then(
     () => res.status(201).send()
-  ).catch((err) => {
-    console.log("error has occured")
-  })
+  ).catch(
+    (err) => {
+      res.status(400).send({
+        status: 400,
+        body: err._message
+      })
+    }
+  )
 })
 /**
 - Nama Lagu / Buku (STRING)
@@ -45,7 +50,7 @@ router.delete('/:id', async (req, res) => {
       res.status(200).send()
     }
   ).catch(
-    (err) => console.log("err")
+    (err) => console.log(err)
   );
 })
 

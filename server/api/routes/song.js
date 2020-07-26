@@ -23,7 +23,12 @@ router.post('/', async (req, res) => {
   song.save().then(
     () => res.status(201).send()
   ).catch(
-    (err) => console.log(err)
+    (err) => {
+      res.status(400).send({
+        status: 400,
+        body: err._message
+      })
+    }
   )
 })
 /**
@@ -43,7 +48,9 @@ router.delete('/:id', async (req, res) => {
       res.status(200).send();
     }
   ).catch(
-    (err) => console.log("err")
+    (err) => {
+
+    }
   );
 })
 
