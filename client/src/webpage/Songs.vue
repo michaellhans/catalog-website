@@ -2,15 +2,15 @@
   <div id="SongsPage">
     <h1><p style="text-align=left">ISO Song Finder</p></h1>
     <b-container>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2 inline" type="search" placeholder="Search" aria-label="Search" size="120">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <div class="d-flex">
+        <input class="form-control d-inline mr-sm-2" v-model="query" type="search" placeholder="Tulis Nama Lagu" aria-label="Search" size="120">
+        <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
+      </div>
       <br>
-      <div class="row">
-        <div class="column" id="cols-1">
-          <select class="form-control-inline" id=kind width="20">
-            <option value="">No Filter</option>
+      <div class="row d-flex align-items-center">
+        <div class="col-6 col-lg-3 mb-3 mb-lg-0">
+          <select class="form-control-inline" width="20" v-model="jenisAransemen" aria-placeholder="Jenis Aransemen">
+            <option :value="null">No Filter</option>
             <option value="Aransemen ISO">Aransemen ISO</option>
             <option value="Aransemen Non-ISO">Aransemen Non-ISO</option>
             <option value="Komposisi ISO">Komposisi ISO</option>
@@ -18,56 +18,24 @@
             <option value="Job">Job</option>
           </select>
         </div>
-        <div class="column" id="cols-2">
+        <div class="col-6 col-lg-2 d-flex flex-column">
           <div class="form-check-inline">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Klasik" checked>
-            <label class="form-check-label" for="exampleRadios1">Klasik</label>
+            <input class="form-check-input" type="radio" id="klasik" :value="true" checked v-model="isKlasik">
+            <label class="form-check-label" for="klasik">Klasik</label>
           </div>
           <div class="form-check-inline">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Non-Klasik">
-            <label class="form-check-label" for="exampleRadios2">Non-Klasik</label>
-          </div>
-        </div>
-        <div class="column" id="cols-3">
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" value="P" id="PianoCheck">
-            <label class="form-check-label" for="PianoCheck">Piano</label>
-          </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" value="G" id="GuitarCheck">
-            <label class="form-check-label" for="GuitarCheck">Guitar</label>
-          </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" value="S" id="StringCheck">
-            <label class="form-check-label" for="StringCheck">String</label>
-          </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" value="B" id="BrassCheck">
-            <label class="form-check-label" for="BrassCheck">Brass</label>
-          </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" value="W" id="WindCheck">
-            <label class="form-check-label" for="WindCheck">Wood Wind</label>
-          </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" value="s" id="SaxoCheck">
-            <label class="form-check-label" for="SaxoCheck">Saxophone</label>
-          </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" value="p" id="PercussionCheck">
-            <label class="form-check-label" for="PercussionCheck">Percussion</label>
+            <input class="form-check-input" type="radio" id="non-klasik" :value="false" v-model="isKlasik">
+            <label class="form-check-label" for="non-klasik">Non-Klasik</label>
           </div>
         </div>
+        <InstrumenCheckBox @checked="updateInstrumentList"/>
       </div>
-      <!-- If the button pressed, show the sorting result -->
-      <div v-if="this.clicked === true">
-        <Result :query="query" :choice="true" />
-      </div>
-      <table class="table table-striped mt-3">
+      <table class="table table-striped mt-3" v-if="hasSearched">
         <thead class="thead-dark">
           <tr>
             <th scope="col">No</th>
             <th scope="col">Nama</th>
+            <th scope="col" class="d-none d-md-table-cell">Aransemen</th>
             <th scope="col">Klasik</th>
             <th scope="col">Instrumen</th>
           </tr>
@@ -79,6 +47,7 @@
           >
             <th scope="row">{{ index + 1 }}</th>
             <td>{{ song.nama }}</td>
+            <td class="d-none d-md-table-cell">{{ song.jenis_aransemen }}</td>
             <td>{{ song.klasik }}</td>
             <td>{{ song.instrumen }}</td>
           </tr>
@@ -91,28 +60,41 @@
 
 <script>
 import SearchBar from '@/components/SearchBar'
-import Result from '@/components/BookResult'
+import InstrumenCheckBox from '@/components/InstrumenCheckBox'
+
 import SongService from '@/services/SongService'
 
 export default {
   components : {
     SearchBar,
-    Result
+    InstrumenCheckBox
   },
   // Container for arrayInput from input box, process boolean, and charArray
   data() {
     return {
       query: '',
-      clicked: false,
-      songs: null
+      songs: null,
+      hasSearched: false,
+      instruments: '',
+      isKlasik: true,
+      jenisAransemen: null
     }
   },
   methods: {
-    execute () {
-      this.clicked = true
-    },
     getSongs() {
       return SongService.get()
+    },
+    async search() {
+      this.songs = (await SongService.search({
+        nama: this.query,
+        instrumen: this.instruments,
+        klasik: this.isKlasik,
+        jenisAransemen: this.jenisAransemen
+      })).data
+      this.hasSearched = true
+    },
+    updateInstrumentList(val) {
+      this.instruments = val
     }
   },
   async created() {

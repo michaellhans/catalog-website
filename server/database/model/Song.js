@@ -9,7 +9,17 @@ const songSchema = new mongoose.Schema({
   },
   jenis_aransemen: {
     type: String,
-    required: [true, getRequiredMessage("Nama buku")]
+    required: [true, getRequiredMessage("Nama buku")],
+    enum: {
+      values: [
+        'Aransemen ISO',
+        'Aransemen Non-ISO',
+        'Komposisi ISO',
+        'Komposisi Non-ISO',
+        'Job'
+      ],
+      message: "input untuk field jenis aransemen salah"
+    }
   },
   klasik: {
     type: Boolean,
@@ -23,7 +33,7 @@ const songSchema = new mongoose.Schema({
         const re = /^(P?G?S?B?W?s?p?){1}$/g
         return re.test(val);
       },
-      message: "String format for instrument is not valid"
+      message: "format string untuk instrumen tidak valid"
     }
   }
 })

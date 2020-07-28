@@ -8,6 +8,22 @@ class BookService {
     return axios.get(url)
   }
 
+  //find
+  static async search(obj) {
+    const { nama, kode, hardcopy, softcopy, instrumen } = obj
+    const searchUrl = nama == null ? `${url}/kode` : `${url}/nama` 
+    const res = axios.get(searchUrl, {
+      params: {
+        nama,
+        kode,
+        hardcopy,
+        softcopy,
+        instrumen
+      }
+    })
+    return res
+  }
+
   // insert
   static async add(song) {
     return axios.post(url, song);

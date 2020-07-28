@@ -1,4 +1,5 @@
 const express = require('express')
+const ErrorHandler = require('../util/MongooseErrorHandler')
 
 const router = express.Router();
 
@@ -9,6 +10,26 @@ const Song = require('../../database/model/Song')
 router.get('/', async (req, res) => {
   const songs = await Song.find({});
   res.send(songs);
+})
+
+// find
+router.get('/nama', async (req, res) => {
+  const requestQuery = req.query;
+  console.log(requestQuery);
+  let { nama, klasik, instrumen, jenis_aransemen } = requestQuery;
+  let searchQuery = {
+    nama : new RegExp(nama),
+    instrumen : new RegExp(instrumen),
+    klasik,
+  }
+
+  if(jenis_aransemen != null) {
+    searchQuery.jenis_aransemen = jenis_aransemen
+  }
+
+  const songs = await Song.find(searchQuery)
+
+  res.send(songs)
 })
 
 // add
@@ -26,7 +47,7 @@ router.post('/', async (req, res) => {
     (err) => {
       res.status(400).send({
         status: 400,
-        body: err._message
+        body: ErrorHandler.getErrorMessage(err)
       })
     }
   )
@@ -36,7 +57,27 @@ router.post('/', async (req, res) => {
 - Jenis Aransemen (STRING)
 - Klasik / Non-Klasik (BOOLEAN)
 - Instrumen (STRING)
+contoh : 
+
+"nama" : "hohoho",
+"jenis_aransemen" : 123,
+"klasik" : true,
+"instrumen" : "PG"
  */
+
+// delete all
+router.delete('/', async (req, res) => {
+  Song.remove({}).then(
+    () => res.status(200).send()
+  ).catch(
+    (err) => {
+      res.status(400).send({
+        status: 400,
+        body: ErrorHandler.getErrorMessage(err)
+      })
+    }
+  );
+})
 
 // delete
 router.delete('/:id', async (req, res) => {
@@ -53,6 +94,5 @@ router.delete('/:id', async (req, res) => {
     }
   );
 })
-
 
 module.exports = router

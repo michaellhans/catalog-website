@@ -11,11 +11,13 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: [true, getRequiredMessage("Kode buku")]
   },
-  hard_copy: {
-    type: Boolean
+  hardcopy: {
+    type: Boolean,
+    required: [true, getRequiredMessage("Hardcopy")]
   },
-  soft_copy: {
-    type: Boolean
+  softcopy: {
+    type: Boolean,
+    required: [true, getRequiredMessage("Softcopy")]
   },
   instrumen: {
     type: String,

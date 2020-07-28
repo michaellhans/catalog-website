@@ -8,6 +8,20 @@ class SongService {
     return axios.get(url)
   }
 
+  //find
+  static async search(obj) {
+    const { nama, instrumen, klasik, jenisAransemen } = obj
+    const res = axios.get(`${url}/nama`, {
+      params: {
+        nama,
+        instrumen,
+        klasik,
+        jenis_aransemen: jenisAransemen
+      }
+    })
+    return res
+  }
+
   // insert
   static async add(song) {
     return axios.post(url, song);

@@ -9,21 +9,21 @@
     <button class="btn btn-outline-success my-2 my-sm-0" @click="login" type="submit">Submit</button>
     <!-- If the prerequisites attributes meet the requirement -->
     <div v-if="this.validity === true && this.isClicked === true">
-        <b-alert show variant="success" style="margin-top : 20px; margin-bottom : 20px;"><b>Kode unik yang dimasukkan valid!</b></b-alert>
-        <div class="card">
-          <div class="card-header">
-            <button class="btn btn-primary my-2 my-sm-0 btn-radius" id="booksLayout" @click="changeForm(false)" type="submit">Books</button>
-            <button class="btn btn-primary my-2 my-sm-0 btn-radius" id="songsLayout" @click="changeForm(true)" type="submit">Songs</button>
+      <b-alert show variant="success" style="margin-top : 20px; margin-bottom : 20px;"><b>Kode unik yang dimasukkan valid!</b></b-alert>
+      <div class="card">
+        <div class="card-header">
+          <button class="btn btn-primary my-2 my-sm-0 btn-radius" id="booksLayout" @click="changeForm(false)" type="submit">Books</button>
+          <button class="btn btn-primary my-2 my-sm-0 btn-radius" id="songsLayout" @click="changeForm(true)" type="submit">Songs</button>
+        </div>
+        <div class="card-body">
+          <div v-if="this.formBool == false">
+            <RegistrationBooks />
           </div>
-          <div class="card-body">
-            <div v-if="this.formBool == false">
-              <RegistrationBooks />
-            </div>
-            <div v-else>
-              <RegistrationSongs />
-            </div>
+          <div v-else>
+            <RegistrationSongs />
           </div>
         </div>
+      </div>
     </div>
     <!-- Everything else, the input is not valid -->
     <div v-else-if="this.isClicked === true">

@@ -1,4 +1,5 @@
 const express = require('express')
+const ErrorHandler = require('../util/MongooseErrorHandler')
 
 const router = express.Router();
 
@@ -11,14 +12,47 @@ router.get('/', async (req, res) => {
   res.send(books);
 })
 
+// Nama Search
+router.get('/nama', async (req, res) => {
+  const requestQuery = req.query;
+  console.log(requestQuery)
+  let { nama, hardcopy, softcopy, instrumen } = requestQuery;
+  let searchQuery = {
+    nama : new RegExp(nama),
+    instrumen : new RegExp(instrumen),
+    hardcopy,
+    softcopy
+  }
+
+  const books = await Book.find(searchQuery)
+
+  res.send(books)
+})
+
+// Kode Search
+router.get('/kode', async (req, res) => {
+  const requestQuery = req.query;
+  let { kode, hardcopy, softcopy, instrumen } = requestQuery;
+  let searchQuery = {
+    kode : new RegExp(kode),
+    instrumen : new RegExp(instrumen),
+    hardcopy,
+    softcopy
+  }
+
+  const books = await Book.find(searchQuery)
+
+  res.send(books)
+})
+
 // Add
 router.post('/', async (req, res) => { 
-  const { nama, kode, hard_copy, soft_copy, instrumen } = req.body;
+  const { nama, kode, hardcopy, softcopy, instrumen } = req.body;
   const book = new Book({
     nama,
     kode,
-    hard_copy,
-    soft_copy,
+    hardcopy,
+    softcopy,
     instrumen
   })
 
@@ -28,7 +62,7 @@ router.post('/', async (req, res) => {
     (err) => {
       res.status(400).send({
         status: 400,
-        body: err._message
+        body: ErrorHandler.getErrorMessage(err)
       })
     }
   )
@@ -51,6 +85,20 @@ router.delete('/:id', async (req, res) => {
     }
   ).catch(
     (err) => console.log(err)
+  );
+})
+
+// delete all
+router.delete('/', async (req, res) => {
+  Book.remove({}).then(
+    () => res.status(200).send()
+  ).catch(
+    (err) => {
+      res.status(400).send({
+        status: 400,
+        body: ErrorHandler.getErrorMessage(err)
+      })
+    }
   );
 })
 
