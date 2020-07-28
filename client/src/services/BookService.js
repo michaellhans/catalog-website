@@ -26,11 +26,12 @@ class BookService {
 
   // insert
   static async add(song) {
+    console.log(song)
     return axios.post(url, song);
   }
 
   // delete
-  static async delete(song, id) {
+  static async delete(id) {
     return axios.delete(url + id);
   }
 }

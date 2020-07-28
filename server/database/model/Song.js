@@ -7,9 +7,9 @@ const songSchema = new mongoose.Schema({
     type: String,
     required: [true, getRequiredMessage("Nama buku")]
   },
-  jenis_aransemen: {
+  jenisAransemen: {
     type: String,
-    required: [true, getRequiredMessage("Nama buku")],
+    required: [true, getRequiredMessage("Jenis Aransemen")],
     enum: {
       values: [
         'Aransemen ISO',

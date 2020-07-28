@@ -45,9 +45,9 @@ export default {
   data: function () {
     return {
       uniqueKey: '',
-      isClicked: false,
-      validity: false,
-      formBool: false
+      isClicked: true,
+      validity: true,
+      formBool: true
     }
   },
   methods: {

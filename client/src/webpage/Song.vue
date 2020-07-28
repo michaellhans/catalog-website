@@ -30,7 +30,7 @@
         </div>
         <InstrumenCheckBox @checked="updateInstrumentList"/>
       </div>
-      <table class="table table-striped mt-3" v-if="hasSearched">
+      <table class="table table-striped mt-3">
         <thead class="thead-dark">
           <tr>
             <th scope="col">No</th>
@@ -47,7 +47,7 @@
           >
             <th scope="row">{{ index + 1 }}</th>
             <td>{{ song.nama }}</td>
-            <td class="d-none d-md-table-cell">{{ song.jenis_aransemen }}</td>
+            <td class="d-none d-md-table-cell">{{ song.jenisAransemen }}</td>
             <td>{{ song.klasik }}</td>
             <td>{{ song.instrumen }}</td>
           </tr>

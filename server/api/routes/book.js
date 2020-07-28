@@ -56,10 +56,13 @@ router.post('/', async (req, res) => {
     instrumen
   })
 
+  console.log(book)
+
   book.save().then(
     () => res.status(201).send()
   ).catch(
     (err) => {
+      console.log(err)
       res.status(400).send({
         status: 400,
         body: ErrorHandler.getErrorMessage(err)

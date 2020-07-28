@@ -10,14 +10,8 @@ class SongService {
 
   //find
   static async search(obj) {
-    const { nama, instrumen, klasik, jenisAransemen } = obj
     const res = axios.get(`${url}/nama`, {
-      params: {
-        nama,
-        instrumen,
-        klasik,
-        jenis_aransemen: jenisAransemen
-      }
+      params: obj
     })
     return res
   }

@@ -16,15 +16,15 @@ router.get('/', async (req, res) => {
 router.get('/nama', async (req, res) => {
   const requestQuery = req.query;
   console.log(requestQuery);
-  let { nama, klasik, instrumen, jenis_aransemen } = requestQuery;
+  let { nama, klasik, instrumen, jenisAransemen } = requestQuery;
   let searchQuery = {
     nama : new RegExp(nama),
     instrumen : new RegExp(instrumen),
     klasik,
   }
 
-  if(jenis_aransemen != null) {
-    searchQuery.jenis_aransemen = jenis_aransemen
+  if(jenisAransemen != null) {
+    searchQuery.jenisAransemen = jenisAransemen
   }
 
   const songs = await Song.find(searchQuery)
@@ -34,13 +34,14 @@ router.get('/nama', async (req, res) => {
 
 // add
 router.post('/', async (req, res) => {
-  const { nama, jenis_aransemen, klasik, instrumen} = req.body;
+  const { nama, jenisAransemen, klasik, instrumen} = req.body;
   const song = new Song({
     nama,
-    jenis_aransemen,
+    jenisAransemen,
     klasik,
     instrumen
   })
+  console.log(song)
   song.save().then(
     () => res.status(201).send()
   ).catch(
@@ -60,7 +61,7 @@ router.post('/', async (req, res) => {
 contoh : 
 
 "nama" : "hohoho",
-"jenis_aransemen" : 123,
+"jenisAransemen" : "Aransemen ISO",
 "klasik" : true,
 "instrumen" : "PG"
  */
