@@ -1,24 +1,24 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Book from '../webpage/Book.vue'
-import Songs from '../webpage/Songs.vue'
+import Song from '../webpage/Song.vue'
 import Penambahan from '../webpage/Penambahan.vue'
 
 Vue.use(Router)
 
 const routes = [
   {
-    path: '/Books',
+    path: '/book',
     name: 'BookPage',
     component: Book
   },
   {
-    path: '/Songs',
-    name: 'SongsPage',
-    component: Songs
+    path: '/song',
+    name: 'SongPage',
+    component: Song
   },
   {
-    path: '/Add',
+    path: '/add',
     name: 'AddPage',
     component: Penambahan
   }
