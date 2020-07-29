@@ -1,10 +1,10 @@
 const express = require('express')
-const ErrorHandler = require('../util/MongooseErrorHandler')
+const ErrorHandler = require(__basedir + '/api/util/MongooseErrorHandler')
 
 const router = express.Router();
 
 // Object
-const Book = require('../../database/model/Book')
+const Book = require(__basedir + '/database/model/Book')
 
 // Index
 router.get('/', async (req, res) => {
@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
 // Nama Search
 router.get('/nama', async (req, res) => {
   const requestQuery = req.query;
-  console.log(requestQuery)
   let { nama, hardcopy, softcopy, instrumen } = requestQuery;
   let searchQuery = {
     nama : new RegExp(nama),
