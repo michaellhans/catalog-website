@@ -4,7 +4,7 @@ import Book from '../webpage/Book.vue'
 import Song from '../webpage/Song.vue'
 import Penambahan from '../webpage/Penambahan.vue'
 import Login from '@/webpage/auth/Login'
-import Register from '@/webpage/auth/Register'
+import AddAccount from '@/webpage/auth/AddAccount'
 
 Vue.use(Router)
 
@@ -31,8 +31,8 @@ const routes = [
   },
   {
     path: '/register',
-    name: 'Register',
-    component: Register
+    name: 'Add account',
+    component: AddAccount
   }
 ]
 

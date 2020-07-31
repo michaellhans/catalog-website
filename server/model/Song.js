@@ -1,15 +1,13 @@
-const getRequiredMessage = require('../util/RequiredMessage').getRequiredMessage;
-
 const mongoose = require('mongoose');
 
 const songSchema = new mongoose.Schema({
   nama: {
     type: String,
-    required: [true, getRequiredMessage("Nama buku")]
+    required: true
   },
   jenisAransemen: {
     type: String,
-    required: [true, getRequiredMessage("Jenis Aransemen")],
+    required: true,
     enum: {
       values: [
         'Aransemen ISO',
@@ -23,11 +21,11 @@ const songSchema = new mongoose.Schema({
   },
   klasik: {
     type: Boolean,
-    required: [true, getRequiredMessage('klasik')],
+    required: true,
   },
   instrumen: {
     type: String,
-    required: [true, getRequiredMessage("instrumen")],
+    required: true,
     validate: {
       validator: function(val) {
         const re = /^(P?G?S?B?W?s?p?){1}$/g

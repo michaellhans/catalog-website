@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import AuthService from '@/services/AuthService'
+
 export default {
   data() {
     return {
@@ -70,7 +72,11 @@ export default {
   },
   methods: {
     register() {
-
+      AuthService.register({
+        username: this.username,
+        password: this.password,
+        email: this.email
+      })
     }
   },
 }

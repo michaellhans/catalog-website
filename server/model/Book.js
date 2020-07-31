@@ -1,27 +1,25 @@
-const getRequiredMessage = require('../util/RequiredMessage').getRequiredMessage;
-
 const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
   nama: {
     type: String,
-    required: [true, getRequiredMessage("Nama buku")]
+    required: true
   },
   kode: {
     type: String,
-    required: [true, getRequiredMessage("Kode buku")]
+    required: true
   },
   hardcopy: {
     type: Boolean,
-    required: [true, getRequiredMessage("Hardcopy")]
+    required: true
   },
   softcopy: {
     type: Boolean,
-    required: [true, getRequiredMessage("Softcopy")]
+    required: true
   },
   instrumen: {
     type: String,
-    required: [true, getRequiredMessage("instrumen")],
+    required: true,
     validate: {
       validator: function(val) {
         const re = /^(P?G?S?B?W?s?p?){1}$/g

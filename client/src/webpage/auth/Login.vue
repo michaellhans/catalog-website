@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import AuthService from '@/services/AuthService'
+
 export default {
   data() {
     return {
@@ -53,7 +55,10 @@ export default {
   },
   methods: {
     login() {
-
+      AuthService.login({
+        username: this.username,
+        password: this.password
+      })
     }
   },
 }

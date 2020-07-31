@@ -1,10 +1,10 @@
 const express = require('express')
-const ErrorHandler = require(__basedir + '/api/util/MongooseErrorHandler')
+const ErrorHandler = require(__basedir + '/routes/util/MongooseErrorHandler')
 
 const router = express.Router();
 
 // Object
-const Song = require(__basedir + '/database/model/Song')
+const Song = require(__basedir + '/model/Song')
 
 // Index
 router.get('/', async (req, res) => {
