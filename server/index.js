@@ -1,24 +1,25 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
-// server set up
+// set up
 const app = express()
-mongoose.connect('mongodb://localhost:27017/catalog', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+global.__basedir = __dirname // set up a basedir variable that points to server dir for everyone to use
 
 // middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors())
 
-
 app.get('/', (req,res) => {
-  res.send("heoihej")
+  res.send("try to visit the other path")
 })
 
 // Routes
-const Song = require('./api/routes/song');
-const Book = require('./api/routes/book');
+const Song = require(__dirname + '/api/routes/song');
+const Book = require(__dirname + '/api/routes/book');
 
 app.use('/api/book', Book)
 app.use('/api/song', Song)
