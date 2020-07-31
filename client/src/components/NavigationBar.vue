@@ -23,13 +23,20 @@
         <div class="navbar-nav">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="https://www.instagram.com/itborchestra/">Instagram</a>
+              <a class="nav-link" target="_blank" href="https://www.instagram.com/itborchestra/">Instagram</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://www.youtube.com/user/mediaISO">YouTube</a>
+              <a class="nav-link" target="_blank" href="https://www.youtube.com/user/mediaISO">YouTube</a>
             </li>
           </ul>
         </div>
+      </div>
+
+      <div class="ml-auto">
+        <ul class="navbar-nav">
+          <router-link class="nav-link" to="/login">Login</router-link>
+          <router-link class="nav-link" to="/register">Add Account</router-link>
+        </ul>
       </div>
     </nav>
   </div>
