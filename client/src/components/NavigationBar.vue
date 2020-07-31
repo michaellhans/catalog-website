@@ -6,18 +6,30 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/book">Books</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/song">Songs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/add">Add</a>
-          </li>
-        </ul>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+        <div class="navbar-nav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/book">Books</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/song">Songs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/add">Add</a>
+            </li>
+          </ul>
+        </div>
+        <div class="navbar-nav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.instagram.com/itborchestra/">Instagram</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.youtube.com/user/mediaISO">YouTube</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   </div>
