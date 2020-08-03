@@ -2,23 +2,20 @@
   <div id="BooksPage">
     <h1><p style="text-align=left">ISO Book Finder</p></h1>
     <b-container>
-      <div class="row" id="row-1">
-        <div class="column" id="cols-1-search">
-          <input class="form-control mr-sm-2 inline" v-model="query" type="search" placeholder="Search" aria-label="Search" size="120">
-        </div>
-        <div class="column" id="cols-2-search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="search">Search</button>
-        </div>
+      <div class="d-flex">
+        <input class="form-control d-inline mr-sm-2" v-model="query" type="search" placeholder="Tulis Nama Lagu" aria-label="Search" size="120">
+        <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
       <br>
-      <div class="row" id="row-2">
-        <div class="column" id="cols-1">
-          <select class="form-control-inline" id=kind v-model="searchBy">
+      <div class="row d-flex align-items-center">
+        <div class="col-6 col-lg-3 mb-3 mb-lg-0">
+          <select class="form-control-inline" width="20" v-model="searchBy">
             <option value="nama">Nama Buku</option>
             <option value="kode">Kode Buku</option>
           </select>
         </div>
-        <div class="column" id="cols-2">
+        <div class="col-6 col-lg-2 d-flex flex-column">
+        <!-- <div class="column" id="cols-2"> -->
           <div class="form-check-inline">
             <input class="form-check-input" type="checkbox" v-model="copyCondition" name="SoftcopyCheck" id="SoftcopyCheck" value="softcopy" checked>
             <label class="form-check-label" for="SoftcopyCheck">Softcopy</label>

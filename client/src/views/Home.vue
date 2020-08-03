@@ -1,6 +1,6 @@
 <template>
-<div class="container">
-  <b-jumbotron bg-variant="success" text-variant="white" border-variant="dark">
+<div class="home">
+  <b-jumbotron bg-variant="secondary" text-variant="white" border-variant="dark">
     <div class="alert alert-success" v-if="getAuthStatus === true">
       Welcome admin {{ getAuthUsername }}!
     </div>
@@ -24,3 +24,10 @@ export default {
   computed: mapGetters(['getAuthStatus', 'getAuthUsername'])
 }
 </script>
+
+<style>
+.home {
+  margin-top: 130px;
+}
+
+</style>
