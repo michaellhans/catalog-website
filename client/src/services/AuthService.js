@@ -4,16 +4,28 @@ const url = 'http://localhost:3000/api/auth/'
 
 class AuthService {
   // login
-  static async login(obj) {
-    const { username, password } = obj
-    const response = await axios.post(url + 'login', {username, password})
-    console.log(response)
+  static async login({ username, password}) {
+    try {
+      const response = await axios.post(url + 'login', {username, password}, { withCredentials: true })
+      return response //OK response means the user is logged in
+    } catch (error) {
+      throw new Error("Credentials false")
+    }
   }
+  
   // register
-  static async register(obj) {
-    const { username, password, email } = obj
-    const response = await axios.post(url + 'register', {username, password, email})
-    console.log(response)
+  static async register({ username, password, email }) {
+    try {
+      const response = await axios.post(url + 'register', {username, password, email})
+      return response
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  static async getAuthStatus() {
+    const resp = await axios.get(url + 'user', { withCredentials: true })
+    return resp
   }
 }
 

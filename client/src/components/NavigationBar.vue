@@ -1,43 +1,62 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Book Finder</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <router-link  class="navbar-brand" to="/">
+        Book Finder
+      </router-link>
+      <button class="navbar-toggler ml-auto" 
+        type="button" 
+        data-toggle="collapse" 
+        data-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+      <div class="navbar-collapse justify-content-between" id="navbarSupportedContent">
         <div class="navbar-nav">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="/book">Books</a>
+              <router-link class="nav-link" to="/book">Books</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/song">Songs</a>
+              <router-link class="nav-link" to="/song">Songs</router-link >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/add">Add</a>
+              <router-link class="nav-link" to="/add">Add</router-link >
             </li>
           </ul>
         </div>
-        <div class="navbar-nav">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" target="_blank" href="https://www.instagram.com/itborchestra/">Instagram</a>
+        <div class="navbar-nav ml-auto">
+          <ul class="navbar-nav">
+            <a class="nav-link" target="_blank" href="https://www.instagram.com/itborchestra/">Instagram</a>
+            <a class="nav-link" target="_blank" href="https://www.youtube.com/user/mediaISO">YouTube</a>
+            <li>
+              <router-link to="/login" v-if="getAuthStatus === false">
+                <button class="btn btn-primary">
+                  Login
+                </button>
+              </router-link>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" target="_blank" href="https://www.youtube.com/user/mediaISO">YouTube</a>
-            </li>
-          </ul>
-        </div>
-      </div>
 
-      <div class="ml-auto">
-        <ul class="navbar-nav">
-          <router-link class="nav-link" to="/login">Login</router-link>
-          <router-link class="nav-link" to="/register">Add Account</router-link>
-        </ul>
+            <li>
+              <router-link class="nav-link" to="/register" v-if="getAuthStatus === true">Add Account</router-link>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters(['getAuthStatus'])
+  },
+}
+</script>

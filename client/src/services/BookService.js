@@ -9,8 +9,8 @@ class BookService {
   }
 
   //find
-  static async search(obj) {
-    const { nama, kode, hardcopy, softcopy, instrumen } = obj
+  static async search(song) {
+    const { nama, kode, hardcopy, softcopy, instrumen } = song
     const searchUrl = nama == null ? `${url}/kode` : `${url}/nama` 
     const res = axios.get(searchUrl, {
       params: {

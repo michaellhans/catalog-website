@@ -55,10 +55,11 @@ router.post('/', async (req, res) => {
     instrumen
   })
 
-  console.log(book)
-
   book.save().then(
-    () => res.status(201).send()
+    (resp) => {
+      res.status(201).send()
+      console.log(resp)
+    }
   ).catch(
     (err) => {
       console.log(err)

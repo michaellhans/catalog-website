@@ -1,18 +1,26 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<div class="container">
+  <b-jumbotron bg-variant="success" text-variant="white" border-variant="dark">
+    <div class="alert alert-success" v-if="getAuthStatus === true">
+      Welcome admin {{ getAuthUsername }}!
+    </div>
+
+    <template v-slot:header>Welcome to ISO Song Finder!</template>
+
+    <template v-slot:lead>
+      This application is made for librarian to add/remove song and for members
+      of ITB Student Orchestra to find their favorite song!
+    </template>
+  </b-jumbotron>
+</div>
+
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
-  }
+  computed: mapGetters(['getAuthStatus', 'getAuthUsername'])
 }
 </script>

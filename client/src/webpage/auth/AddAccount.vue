@@ -5,7 +5,7 @@
         Register
       </div>
       <div class="card-body">
-        <div class="form mx-5">
+        <form class="form mx-5" @submit.stop.prevent>
           <div class="d-flex align-items-center">
             <label for="email" class="col-2 text-left m-0 p-0">Email</label>
             <div class="w-100">
@@ -16,7 +16,7 @@
                 v-model="email"
                 ></b-input>
               <b-form-text id="email-block" class="text-left">
-                Your email address, there will be no authentification whatsoever
+                Your email address, there will be no authentication whatsoever
               </b-form-text>
             </div>
           </div>
@@ -43,6 +43,7 @@
                 type="password" 
                 id="password"
                 aria-describedby="password-block"
+                autocomplete="false"
                 v-model="password"
                 ></b-input>
               <b-form-text id="password-block" class="text-left">
@@ -53,7 +54,7 @@
           <button class="btn btn-primary mt-3" @click="register">
             Register
           </button>
-        </div>
+        </form>
       </div>
     </div>
   </b-container>

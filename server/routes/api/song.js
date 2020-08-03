@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
 // find
 router.get('/nama', async (req, res) => {
   const requestQuery = req.query;
-  console.log(requestQuery);
   let { nama, klasik, instrumen, jenisAransemen } = requestQuery;
   let searchQuery = {
     nama : new RegExp(nama),
@@ -41,9 +40,11 @@ router.post('/', async (req, res) => {
     klasik,
     instrumen
   })
-  console.log(song)
   song.save().then(
-    () => res.status(201).send()
+    (newsong) => {
+      res.status(201).send()
+      console.log(newsong)
+    }
   ).catch(
     (err) => {
       res.status(400).send({

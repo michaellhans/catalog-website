@@ -14,7 +14,7 @@ global.__basedir = __dirname // set up a basedir variable that points to server 
 // middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(cors())
+app.use(cors({ credentials: true, origin: "http://localhost:8080" }))
 app.use(session({
   secret: "abc",
   resave: false,

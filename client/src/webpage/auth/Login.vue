@@ -5,13 +5,17 @@
         Login
       </div>
       <div class="card-body">
-        <div class="form mx-5">
+        <b-alert show dismissible variant="danger" v-if="error!=null">
+          Wrong Credential! Username or password is wrong
+        </b-alert>
+        <form class="form mx-5" @submit.stop.prevent>
           <div class="d-flex align-items-center">
             <label for="username" class="col-2 text-left m-0 p-0">Username</label>
             <b-input 
               type="text" 
               id="username"
-              aria-describedby="email-block"
+              aria-autocomplete="on"
+              autocomplete="on"
               class="col-10"
               v-model="username"
               ></b-input>
@@ -22,45 +26,65 @@
             <b-input 
               type="password" 
               id="password"
-              aria-describedby="email-block"
+              aria-autocomplete="on"
+              autocomplete="on"
               class="col-10"
               v-model="password"
               ></b-input>
           </div>
           <div class="mt-3">
-            <button class="btn btn-primary" @click="login">
+            <button class="btn btn-primary" @click="authenticate">
               Login
             </button>
             <router-link to="/forget">
-              <button class="btn btn-danger ml-3" @click="register">
+              <button class="btn btn-danger ml-3">
                 Forget Password?
               </button>
             </router-link>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </b-container>
 </template>
 
 <script>
-import AuthService from '@/services/AuthService'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'login',
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      error: null,
+      a: null
     }
   },
   methods: {
-    login() {
-      AuthService.login({
-        username: this.username,
-        password: this.password
-      })
+    ...mapActions(['login']),
+    async authenticate() {
+      try {
+        const isLoggedIn = await this.login({
+          username: this.username,
+          password: this.password
+        })
+        console.log("isloggedin : ")
+        console.log(isLoggedIn)
+        if(isLoggedIn) {
+          this.$router.push('/')
+        }
+      } catch (error) {
+        this.error = error
+      }
+    },
+    resetForm() {
+      this.username = '',
+      this.password = ''
     }
   },
+  computed: mapGetters(['getAuthStatus'])
+  ,
 }
 </script>
 
