@@ -1,12 +1,21 @@
 <template>
   <div id="BooksPage">
-    <h1><p style="text-align=left">ISO Book Finder</p></h1>
+    <h1>
+      <p style="text-align=left">ISO Book Finder</p>
+    </h1>
     <b-container>
       <div class="d-flex">
-        <input class="form-control d-inline mr-sm-2" v-model="query" type="search" placeholder="Tulis Nama Lagu" aria-label="Search" size="120">
+        <input
+          class="form-control d-inline mr-sm-2"
+          v-model="query"
+          type="search"
+          :placeholder="`Tulis ${searchBy} buku`"
+          aria-label="Search"
+          size="120"
+        />
         <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
-      <br>
+      <br />
       <div class="row d-flex align-items-center">
         <div class="col-6 col-lg-3 mb-3 mb-lg-0">
           <select class="form-control-inline" width="20" v-model="searchBy">
@@ -15,19 +24,35 @@
           </select>
         </div>
         <div class="col-6 col-lg-2 d-flex flex-column">
-        <!-- <div class="column" id="cols-2"> -->
+          <!-- <div class="column" id="cols-2"> -->
           <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" v-model="copyCondition" name="SoftcopyCheck" id="SoftcopyCheck" value="softcopy" checked>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="copyCondition"
+              name="SoftcopyCheck"
+              id="SoftcopyCheck"
+              value="softcopy"
+              checked
+            />
             <label class="form-check-label" for="SoftcopyCheck">Softcopy</label>
           </div>
           <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" v-model="copyCondition" name="HardcopyCheck" id="HardcopyCheck" value="hardcopy">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="copyCondition"
+              name="HardcopyCheck"
+              id="HardcopyCheck"
+              value="hardcopy"
+            />
             <label class="form-check-label" for="HardcopyCheck">Hardcopy</label>
           </div>
         </div>
-        <InstrumenCheckBox @checked="updateInstrumentList"/>
+        <InstrumenCheckBox @checked="updateInstrumentList" />
       </div>
-      <table class="table table-striped mt-3">
+      <Loading class="mx-auto mt-3" v-if="loading === true" />
+      <table class="table table-striped mt-3" v-else>
         <thead class="thead-dark">
           <tr>
             <th scope="col">No</th>
@@ -39,10 +64,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr 
-            v-for="(book, index) in books"
-            :key="book._id"
-          >
+          <tr v-for="(book, index) in books" :key="book._id">
             <th scope="row">{{ index + 1 }}</th>
             <td>{{ book.nama }}</td>
             <td>{{ book.kode }}</td>
@@ -57,53 +79,62 @@
 </template>
 
 <script>
-import SearchBar from '@/components/SearchBar'
-import InstrumenCheckBox from '@/components/InstrumenCheckBox'
+import SearchBar from "@/components/SearchBar";
+import InstrumenCheckBox from "@/components/InstrumenCheckBox";
+import Loading from "@/components/Loading";
 
-import BookService from '@/services/BookService'
+import BookService from "@/services/BookService";
 
 export default {
-  components : {
+  components: {
     SearchBar,
-    InstrumenCheckBox
+    InstrumenCheckBox,
+    Loading,
   },
   data() {
     return {
-      query: '',
-      instruments: '',
+      query: "",
+      instruments: "",
       copyCondition: [],
-      searchBy: 'nama',
+      searchBy: "nama",
       hasSearched: false,
-      books: null
-    }
+      books: null,
+      loading: true,
+    };
   },
   methods: {
     getBooks() {
-      return BookService.get()
+      return BookService.get();
     },
     updateInstrumentList(val) {
-      this.instruments = val
+      this.instruments = val;
     },
     async search() {
-      this.books = (await BookService.search({
-        query: this.query,
-        instrumen: this.instruments,
-        searchBy: this.searchBy,
-        softcopy: this.copyCondition.includes("softcopy"),
-        hardcopy: this.copyCondition.includes("hardcopy")
-      })).data
-      this.hasSearched = true
+      this.loading = true;
+      this.books = (
+        await BookService.search({
+          query: this.query,
+          instrumen: this.instruments,
+          searchBy: this.searchBy,
+          softcopy: this.copyCondition.includes("softcopy"),
+          hardcopy: this.copyCondition.includes("hardcopy"),
+        })
+      ).data;
+      this.hasSearched = true;
+      this.loading = false;
     },
   },
   async created() {
+    this.loading = true;
     this.books = (await this.getBooks()).data;
+    this.loading = false;
   },
-}
+};
 </script>
 
 <style>
 #BooksPage {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -139,5 +170,4 @@ export default {
   background-color: rgb(247, 243, 243);
   padding: 10px;
 }
-
 </style>

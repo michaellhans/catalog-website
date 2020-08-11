@@ -1,30 +1,35 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const url = 'http://localhost:3000/api/book/'
+const url = 'http://localhost:3000/api/book/';
 
 class BookService {
   // index
   static async get() {
-    return axios.get(url)
+    return axios.get(url);
   }
 
   //find
   static async search(book) {
-    console.log(book)
-    const { query, searchBy, hardcopy, softcopy, instrumen } = book
+    console.log(book);
+    let { query, searchBy, hardcopy, softcopy, instrumen } = book;
     // bila softcopy dan hardcopy false, maka jadi null aja
-    
-    const searchUrl = `${url}/${searchBy}` 
+    if (hardcopy === false) {
+      hardcopy = null;
+    }
+    if (softcopy === false) {
+      softcopy = null;
+    }
+    const searchUrl = `${url}/${searchBy}`;
     const params = {
       hardcopy,
       softcopy,
-      instrumen
-    }
-    params[searchBy] = query
+      instrumen,
+    };
+    params[searchBy] = query;
     const res = axios.get(searchUrl, {
-      params
-    })
-    return res
+      params,
+    });
+    return res;
   }
 
   // insert

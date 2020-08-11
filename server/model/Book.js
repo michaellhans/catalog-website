@@ -3,32 +3,32 @@ const mongoose = require('mongoose');
 const bookSchema = new mongoose.Schema({
   nama: {
     type: String,
-    required: true
+    required: true,
   },
   kode: {
     type: String,
-    required: true
+    required: true,
   },
   hardcopy: {
     type: Boolean,
-    required: true
+    required: true,
   },
   softcopy: {
     type: Boolean,
-    required: true
+    required: true,
   },
   instrumen: {
     type: String,
     required: true,
     validate: {
-      validator: function(val) {
-        const re = /^(P?G?S?B?W?s?p?){1}$/g
+      validator: function (val) {
+        const re = /^(P?G?S?B?W?s?p?){1}$/g;
         return re.test(val);
       },
-      message: "String format for instrument is not valid"
-    }
-  }
-})
+      message: 'String format for instrument is not valid',
+    },
+  },
+});
 
 const Book = mongoose.model('book', bookSchema);
 

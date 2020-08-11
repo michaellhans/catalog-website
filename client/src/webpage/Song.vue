@@ -1,15 +1,29 @@
 <template>
   <div id="SongsPage">
-    <h1><p style="text-align=left">ISO Song Finder</p></h1>
+    <h1>
+      <p style="text-align=left">ISO Song Finder</p>
+    </h1>
     <b-container>
       <div class="d-flex">
-        <input class="form-control d-inline mr-sm-2" v-model="query" type="search" placeholder="Tulis Nama Lagu" aria-label="Search" size="120">
+        <input
+          class="form-control d-inline mr-sm-2"
+          v-model="query"
+          type="search"
+          placeholder="Tulis Nama Lagu"
+          aria-label="Search"
+          size="120"
+        />
         <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
-      <br>
+      <br />
       <div class="row d-flex align-items-center">
         <div class="col-6 col-lg-3 mb-3 mb-lg-0">
-          <select class="form-control-inline" width="20" v-model="jenisAransemen" aria-placeholder="Jenis Aransemen">
+          <select
+            class="form-control-inline"
+            width="20"
+            v-model="jenisAransemen"
+            aria-placeholder="Jenis Aransemen"
+          >
             <option :value="null">No Filter</option>
             <option value="Aransemen ISO">Aransemen ISO</option>
             <option value="Aransemen Non-ISO">Aransemen Non-ISO</option>
@@ -20,17 +34,31 @@
         </div>
         <div class="col-6 col-lg-2 d-flex flex-column">
           <div class="form-check-inline">
-            <input class="form-check-input" type="radio" id="klasik" :value="true" checked v-model="isKlasik">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="klasik"
+              :value="true"
+              checked
+              v-model="isKlasik"
+            />
             <label class="form-check-label" for="klasik">Klasik</label>
           </div>
           <div class="form-check-inline">
-            <input class="form-check-input" type="radio" id="non-klasik" :value="false" v-model="isKlasik">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="non-klasik"
+              :value="false"
+              v-model="isKlasik"
+            />
             <label class="form-check-label" for="non-klasik">Non-Klasik</label>
           </div>
         </div>
-        <InstrumenCheckBox @checked="updateInstrumentList"/>
+        <InstrumenCheckBox @checked="updateInstrumentList" />
       </div>
-      <table class="table table-striped mt-3">
+      <Loading class="mx-auto mt-3" v-if="loading === true" />
+      <table class="table table-striped mt-3" v-else>
         <thead class="thead-dark">
           <tr>
             <th scope="col">No</th>
@@ -41,10 +69,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr 
-            v-for="(song, index) in songs"
-            :key="song._id"
-          >
+          <tr v-for="(song, index) in songs" :key="song._id">
             <th scope="row">{{ index + 1 }}</th>
             <td>{{ song.nama }}</td>
             <td class="d-none d-md-table-cell">{{ song.jenisAransemen }}</td>
@@ -53,59 +78,67 @@
           </tr>
         </tbody>
       </table>
-      
     </b-container>
   </div>
 </template>
 
 <script>
-import SearchBar from '@/components/SearchBar'
-import InstrumenCheckBox from '@/components/InstrumenCheckBox'
+import SearchBar from "@/components/SearchBar";
+import InstrumenCheckBox from "@/components/InstrumenCheckBox";
+import Loading from "@/components/Loading";
 
-import SongService from '@/services/SongService'
+import SongService from "@/services/SongService";
 
 export default {
-  components : {
+  components: {
     SearchBar,
-    InstrumenCheckBox
+    InstrumenCheckBox,
+    Loading,
   },
   // Container for arrayInput from input box, process boolean, and charArray
   data() {
     return {
-      query: '',
+      query: "",
       songs: null,
       hasSearched: false,
-      instruments: '',
+      instruments: "",
       isKlasik: true,
-      jenisAransemen: null
-    }
+      jenisAransemen: null,
+      loading: true,
+    };
   },
   methods: {
     getSongs() {
-      return SongService.get()
+      return SongService.get();
     },
     async search() {
-      this.songs = (await SongService.search({
-        nama: this.query,
-        instrumen: this.instruments,
-        klasik: this.isKlasik,
-        jenisAransemen: this.jenisAransemen
-      })).data
-      this.hasSearched = true
+      this.loading = true;
+      this.songs = (
+        await SongService.search({
+          nama: this.query,
+          instrumen: this.instruments,
+          klasik: this.isKlasik,
+          jenisAransemen: this.jenisAransemen,
+        })
+      ).data;
+      this.loading = false;
+      this.hasSearched = true;
     },
     updateInstrumentList(val) {
-      this.instruments = val
-    }
+      this.instruments = val;
+    },
   },
   async created() {
-    this.songs = (await this.getSongs()).data
-  }
-}
+    this.loading = true;
+    this.songs = (await this.getSongs()).data;
+    this.loading = false;
+  },
+};
 </script>
 
 <style>
 #SongsPage {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -133,5 +166,4 @@ export default {
   background-color: rgb(247, 243, 243);
   padding: 10px;
 }
-
 </style>
