@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/nama', async (req, res) => {
   const requestQuery = req.query;
   let { nama, hardcopy, softcopy, instrumen } = requestQuery;
+  console.log(requestQuery)
   let searchQuery = {
     nama : new RegExp(nama),
     instrumen : new RegExp(instrumen),

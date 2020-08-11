@@ -82,8 +82,9 @@ export default {
     },
     async search() {
       this.books = (await BookService.search({
-        nama: this.query,
+        query: this.query,
         instrumen: this.instruments,
+        searchBy: this.searchBy,
         softcopy: this.copyCondition.includes("softcopy"),
         hardcopy: this.copyCondition.includes("hardcopy")
       })).data

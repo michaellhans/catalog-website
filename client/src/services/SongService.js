@@ -9,9 +9,10 @@ class SongService {
   }
 
   //find
-  static async search(obj) {
+  static async search(song) {
+    console.log(song)
     const res = axios.get(`${url}/nama`, {
-      params: obj
+      params: song
     })
     return res
   }

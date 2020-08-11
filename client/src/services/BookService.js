@@ -9,24 +9,26 @@ class BookService {
   }
 
   //find
-  static async search(song) {
-    const { nama, kode, hardcopy, softcopy, instrumen } = song
-    const searchUrl = nama == null ? `${url}/kode` : `${url}/nama` 
+  static async search(book) {
+    console.log(book)
+    const { query, searchBy, hardcopy, softcopy, instrumen } = book
+    // bila softcopy dan hardcopy false, maka jadi null aja
+    
+    const searchUrl = `${url}/${searchBy}` 
+    const params = {
+      hardcopy,
+      softcopy,
+      instrumen
+    }
+    params[searchBy] = query
     const res = axios.get(searchUrl, {
-      params: {
-        nama,
-        kode,
-        hardcopy,
-        softcopy,
-        instrumen
-      }
+      params
     })
     return res
   }
 
   // insert
   static async add(song) {
-    console.log(song)
     return axios.post(url, song);
   }
 
