@@ -33,6 +33,8 @@
             <th scope="col">No</th>
             <th scope="col">Nama</th>
             <th scope="col">Kode</th>
+            <th scope="col">Hardcopy</th>
+            <th scope="col">Softcopy</th>
             <th scope="col">Instrumen</th>
           </tr>
         </thead>
@@ -44,6 +46,8 @@
             <th scope="row">{{ index + 1 }}</th>
             <td>{{ book.nama }}</td>
             <td>{{ book.kode }}</td>
+            <td>{{ book.hardcopy }}</td>
+            <td>{{ book.softcopy }}</td>
             <td>{{ book.instrumen }}</td>
           </tr>
         </tbody>
