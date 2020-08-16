@@ -10,7 +10,7 @@
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent"
-        aria-expanded="true"
+        aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
@@ -39,19 +39,26 @@
               class="nav-link"
               target="_blank"
               href="https://www.instagram.com/itborchestra/"
-              >Instagram</a
             >
+              <i
+                class="fa fa-instagram"
+                style="font-size:25px; margin-right:5px;"
+              ></i>
+            </a>
             <a
               class="nav-link"
               target="_blank"
               href="https://www.youtube.com/user/mediaISO"
-              >YouTube</a
             >
+              <i
+                class="fa fa-youtube-square"
+                style="font-size:25px; margin-right:10px;"
+              ></i>
+            </a>
+
             <li>
               <router-link to="/login" v-if="getAuthStatus === false">
-                <button class="btn btn-primary">
-                  Login
-                </button>
+                <button class="btn btn-primary">Login</button>
               </router-link>
             </li>
 

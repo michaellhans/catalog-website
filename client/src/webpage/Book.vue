@@ -56,6 +56,10 @@
         </div>
         <InstrumenCheckBox @checked="updateInstrumentList" />
       </div>
+      <label
+        style="margin-top: 10px; font-size: 14px"
+        v-if="loading === false"
+      >Menampilkan {{ books.length }} hasil pencarian buku</label>
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
         <table class="table table-striped mt-3">
