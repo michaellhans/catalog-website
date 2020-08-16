@@ -4,14 +4,15 @@ const url = 'http://localhost:3000/api/book/';
 
 class BookService {
   // index
-  static async get() {
-    return axios.get(url);
+  static async get(params) {
+    return axios.get(url, {
+      params,
+    });
   }
 
   //find
   static async search(book) {
-    console.log(book);
-    let { query, searchBy, hardcopy, softcopy, instrumen } = book;
+    let { query, searchBy, hardcopy, softcopy, instrumen, page } = book;
     // bila softcopy dan hardcopy false, maka jadi null aja
     if (hardcopy === false) {
       hardcopy = null;
@@ -24,8 +25,9 @@ class BookService {
       hardcopy,
       softcopy,
       instrumen,
+      [searchBy]: query,
+      page,
     };
-    params[searchBy] = query;
     const res = axios.get(searchUrl, {
       params,
     });

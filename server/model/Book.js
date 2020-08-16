@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 
 const bookSchema = new mongoose.Schema({
   nama: {
@@ -29,6 +30,8 @@ const bookSchema = new mongoose.Schema({
     },
   },
 });
+
+bookSchema.plugin(mongoosePaginate);
 
 const Book = mongoose.model('book', bookSchema);
 

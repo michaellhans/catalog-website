@@ -1,21 +1,23 @@
 const express = require('express');
 const ErrorHandler = require(__basedir + '/routes/util/MongooseErrorHandler');
-
 const router = express.Router();
+
+const Util = require('./Util');
 
 // Object
 const Book = require(__basedir + '/model/Book');
 
 // Index
 router.get('/', async (req, res) => {
-  const books = await Book.find({});
+  const { page } = req.query;
+
+  const books = await Book.paginate({}, { page, limit: Util.docsPerPage });
   res.send(books);
 });
 
 // Nama Search
 router.get('/nama', async (req, res) => {
-  const requestQuery = req.query;
-  let { nama, hardcopy, softcopy, instrumen } = requestQuery;
+  let { nama, hardcopy, softcopy, instrumen, page } = req.query;
   let searchQuery = {
     nama: new RegExp(nama),
     instrumen: new RegExp(instrumen),
@@ -26,18 +28,22 @@ router.get('/nama', async (req, res) => {
   if (softcopy) {
     searchQuery.softcopy = softcopy;
   }
-  const books = await Book.find(searchQuery);
+  const books = await Book.paginate(searchQuery, {
+    page,
+    limit: Util.docsPerPage,
+  });
+
   res.send(books);
 });
 
 // Kode Search
 router.get('/kode', async (req, res) => {
-  const requestQuery = req.query;
-  let { kode, hardcopy, softcopy, instrumen } = requestQuery;
+  let { kode, hardcopy, softcopy, instrumen, page } = req.query;
   let searchQuery = {
     kode: new RegExp(kode),
     instrumen: new RegExp(instrumen),
   };
+
   if (hardcopy) {
     searchQuery.hardcopy = hardcopy;
   }
@@ -45,7 +51,10 @@ router.get('/kode', async (req, res) => {
     searchQuery.softcopy = softcopy;
   }
 
-  const books = await Book.find(searchQuery);
+  const books = await Book.paginate(searchQuery, {
+    page,
+    limit: Util.docsPerPage,
+  });
 
   res.send(books);
 });

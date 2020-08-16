@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 
 const songSchema = new mongoose.Schema({
   nama: {
     type: String,
-    required: true
+    required: true,
   },
   jenisAransemen: {
     type: String,
@@ -14,10 +15,10 @@ const songSchema = new mongoose.Schema({
         'Aransemen Non-ISO',
         'Komposisi ISO',
         'Komposisi Non-ISO',
-        'Job'
+        'Job',
       ],
-      message: "input untuk field jenis aransemen salah"
-    }
+      message: 'input untuk field jenis aransemen salah',
+    },
   },
   klasik: {
     type: Boolean,
@@ -27,14 +28,16 @@ const songSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: function(val) {
-        const re = /^(P?G?S?B?W?s?p?){1}$/g
+      validator: function (val) {
+        const re = /^(P?G?S?B?W?s?p?){1}$/g;
         return re.test(val);
       },
-      message: "format string untuk instrumen tidak valid"
-    }
-  }
-})
+      message: 'format string untuk instrumen tidak valid',
+    },
+  },
+});
+
+songSchema.plugin(mongoosePaginate);
 
 const Song = mongoose.model('song', songSchema);
 

@@ -7,13 +7,18 @@
       <div class="d-flex">
         <input
           class="form-control d-inline mr-sm-2"
-          v-model="query"
+          v-model="searchValue"
           type="search"
           :placeholder="`Tulis ${searchBy} buku`"
           aria-label="Search"
           size="120"
         />
-        <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
+        <button
+          class="btn btn-outline-success my-2 my-sm-0"
+          v-on:click="search"
+        >
+          Search
+        </button>
       </div>
       <br />
       <div class="row d-flex align-items-center">
@@ -52,89 +57,111 @@
         <InstrumenCheckBox @checked="updateInstrumentList" />
       </div>
       <Loading class="mx-auto mt-3" v-if="loading === true" />
-      <table class="table table-striped mt-3" v-else>
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">No</th>
-            <th scope="col">Nama</th>
-            <th scope="col">Kode</th>
-            <th scope="col">Hardcopy</th>
-            <th scope="col">Softcopy</th>
-            <th scope="col">Instrumen</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(book, index) in books" :key="book._id">
-            <th scope="row">{{ index + 1 }}</th>
-            <td>{{ book.nama }}</td>
-            <td>{{ book.kode }}</td>
-            <td>{{ book.hardcopy }}</td>
-            <td>{{ book.softcopy }}</td>
-            <td>{{ book.instrumen }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div v-else>
+        <table class="table table-striped mt-3">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Nama</th>
+              <th scope="col">Kode</th>
+              <th scope="col">Hardcopy</th>
+              <th scope="col">Softcopy</th>
+              <th scope="col">Instrumen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(book, index) in books" :key="book._id">
+              <th scope="row">{{ index + 1 }}</th>
+              <td>{{ book.nama }}</td>
+              <td>{{ book.kode }}</td>
+              <td>{{ book.hardcopy }}</td>
+              <td>{{ book.softcopy }}</td>
+              <td>{{ book.instrumen }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <PageNavigation
+          :prevPage="prevPage"
+          :nextPage="nextPage"
+          :page="page"
+          :totalPage="totalPage"
+        />
+      </div>
     </b-container>
   </div>
 </template>
 
 <script>
-import SearchBar from "@/components/SearchBar";
-import InstrumenCheckBox from "@/components/InstrumenCheckBox";
-import Loading from "@/components/Loading";
+import SearchBar from '@/components/SearchBar';
+import InstrumenCheckBox from '@/components/InstrumenCheckBox';
+import Loading from '@/components/Loading';
+import PageNavigation from '@/components/PageNavigation';
 
-import BookService from "@/services/BookService";
+import BookService from '@/services/BookService';
 
 export default {
   components: {
     SearchBar,
     InstrumenCheckBox,
     Loading,
+    PageNavigation,
   },
   data() {
     return {
-      query: "",
-      instruments: "",
+      searchValue: '',
+      instruments: '',
       copyCondition: [],
-      searchBy: "nama",
+      searchBy: 'nama',
       hasSearched: false,
+      query: {},
       books: null,
       loading: true,
+      page: 1,
+      totalPage: 1,
     };
   },
   methods: {
-    getBooks() {
-      return BookService.get();
-    },
     updateInstrumentList(val) {
       this.instruments = val;
     },
-    async search() {
+    async getBooks() {
       this.loading = true;
-      this.books = (
-        await BookService.search({
-          query: this.query,
-          instrumen: this.instruments,
-          searchBy: this.searchBy,
-          softcopy: this.copyCondition.includes("softcopy"),
-          hardcopy: this.copyCondition.includes("hardcopy"),
-        })
-      ).data;
+      const response = (await BookService.search(this.query)).data;
+      this.books = response.docs;
+      this.totalPage = Math.ceil(response.total / response.limit);
       this.hasSearched = true;
       this.loading = false;
     },
+    nextPage() {
+      this.page = this.page === this.totalPage ? 1 : this.page + 1;
+      this.getBooks();
+    },
+    prevPage() {
+      this.page = this.page === 1 ? this.totalPage : this.page - 1;
+      this.getBooks();
+    },
+    search() {
+      this.page = 1;
+      this.query = {
+        query: this.searchValue,
+        instrumen: this.instruments,
+        searchBy: this.searchBy,
+        softcopy: this.copyCondition.includes('softcopy'),
+        hardcopy: this.copyCondition.includes('hardcopy'),
+        page: this.page,
+      };
+      this.getBooks();
+    },
   },
   async created() {
-    this.loading = true;
-    this.books = (await this.getBooks()).data;
-    this.loading = false;
+    this.search();
   },
 };
 </script>
 
 <style>
 #BooksPage {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
