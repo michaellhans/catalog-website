@@ -1,5 +1,5 @@
 <template>
-  <div id="SongsPage">
+  <div class="normal-page">
     <TitleSpace :titleValue="'ISO Song Finder'" />
     <b-container>
       <div class="d-flex">
@@ -14,7 +14,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
       <br />
-      <div class="row d-flex align-items-center">
+      <div id="filterOption" class="row d-flex align-items-center">
         <div class="col-6 col-lg-3 mb-3 mb-lg-0">
           <select
             class="form-control-inline"
@@ -146,32 +146,7 @@ export default {
 </script>
 
 <style>
-#SongsPage {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 20px;
-}
-
-#cols-1 {
-  width: 20%;
-}
-
-#cols-2 {
-  width: 20%;
-}
-
-#cols-3 {
-  width: 60%;
-}
-
-#kind {
-  width: 200px;
-}
-
-.row {
+#filterOption {
   background-color: rgb(247, 243, 243);
   padding: 10px;
 }

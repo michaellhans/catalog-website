@@ -37,4 +37,8 @@ export default {
 .fa-times {
   color: red;
 }
+
+table {
+  margin-bottom: 50px;
+}
 </style>

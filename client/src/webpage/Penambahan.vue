@@ -1,11 +1,20 @@
 <template>
-  <b-container>
-  <div id="AddPage">
-    <h1><p style="text-align=left">ISO Add Book or Song</p></h1>
+  <div class="normal-page">
+    <TitleSpace :titleValue="'Penambahan Buku atau Lagu'" />
     <div class="card">
       <div class="card-header">
-        <button class="btn btn-primary my-2 my-sm-0 btn-radius" id="booksLayout" @click="changeForm(false)" type="submit">Add Book</button>
-        <button class="btn btn-primary my-2 my-sm-0 btn-radius" id="songsLayout" @click="changeForm(true)" type="submit">Add Song</button>
+        <button
+          class="btn btn-primary my-2 my-sm-0 btn-radius"
+          id="booksLayout"
+          @click="changeForm(false)"
+          type="submit"
+        >Add Book</button>
+        <button
+          class="btn btn-primary my-2 my-sm-0 btn-radius"
+          id="songsLayout"
+          @click="changeForm(true)"
+          type="submit"
+        >Add Song</button>
       </div>
       <div class="card-body">
         <div v-if="this.formBool == false">
@@ -17,51 +26,47 @@
       </div>
     </div>
   </div>
-  </b-container>
 </template>
 
 <script>
-import RegistrationSongs from "@/components/RegistrationSongs.vue"
-import RegistrationBooks from "@/components/RegistrationBooks.vue"
+import RegistrationSongs from "@/components/RegistrationSongs.vue";
+import RegistrationBooks from "@/components/RegistrationBooks.vue";
+import TitleSpace from "@/components/TitleSpace.vue";
 
 export default {
-  components : {
-      RegistrationSongs,
-      RegistrationBooks
+  components: {
+    TitleSpace,
+    RegistrationSongs,
+    RegistrationBooks,
   },
   data: function () {
     return {
-      uniqueKey: '',
-      isClicked: true,
-      validity: true,
-      formBool: true
-    }
+      formBool: true,
+    };
   },
   methods: {
-    login () {
-      this.isClicked = true
-      if (this.uniqueKey === "mario ganteng") {
-        this.validity = true
-      }
-      else {
-        this.validity = false
-      }
+    changeForm(formBool) {
+      this.formBool = formBool;
     },
-    changeForm (formBool) {
-      this.formBool = formBool
-    }
-  }
-}
+  },
+};
 </script>
 
 <style>
-#AddPage {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+.normal-page {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 20px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 80px;
+  background: white;
+  width: 80%;
+  margin: auto;
+  min-height: 700px;
 }
 
 #booksLayout {

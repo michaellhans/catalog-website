@@ -1,5 +1,5 @@
 <template>
-  <div id="BooksPage">
+  <div class="normal-page">
     <b-container>
       <TitleSpace :titleValue="'ISO Book Finder'"></TitleSpace>
       <div class="d-flex">
@@ -14,7 +14,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
       <br />
-      <div class="row d-flex align-items-center">
+      <div id="filterOption" class="row d-flex align-items-center">
         <div class="col-6 col-lg-3 mb-3 mb-lg-0">
           <select class="form-control-inline" width="20" v-model="searchBy">
             <option value="nama">Nama Buku</option>
@@ -143,41 +143,4 @@ export default {
 </script>
 
 <style>
-#BooksPage {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 20px;
-}
-
-#cols-1-search {
-  width: 90%;
-}
-
-#cols-2-search {
-  width: 10%;
-}
-
-#cols-1 {
-  width: 13%;
-}
-
-#cols-2 {
-  width: 19%;
-}
-
-#cols-3 {
-  width: 68%;
-}
-
-#kind {
-  width: 130px;
-}
-
-#row-2 {
-  background-color: rgb(247, 243, 243);
-  padding: 10px;
-}
 </style>

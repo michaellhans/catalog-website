@@ -1,9 +1,9 @@
 <template>
   <div id="navbar-finder">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-custom">
       <router-link class="navbar-brand" to="/">Book Finder</router-link>
       <button
-        class="navbar-toggler ml-auto"
+        class="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
@@ -34,13 +34,11 @@
               <i class="fa fa-instagram" style="font-size:25px; margin-right:5px;"></i>
             </a>
             <a class="nav-link" target="_blank" href="https://www.youtube.com/user/mediaISO">
-              <i class="fa fa-youtube-square" style="font-size:25px; margin-right:10px;"></i>
+              <i class="fa fa-youtube-square" style="font-size:25px; margin-right:5px;"></i>
             </a>
 
             <li>
-              <router-link to="/login" v-if="getAuthStatus === false">
-                <button class="btn btn-primary">Login</button>
-              </router-link>
+              <router-link class="nav-link" to="/login" v-if="getAuthStatus === false">Login</router-link>
             </li>
 
             <li>
@@ -72,8 +70,28 @@ export default {
   padding-right: 200px;
 }
 
+.navbar-custom {
+  background-color: rgb(62, 66, 62);
+  color: white;
+}
+
+.navbar-brand,
+.nav-item,
+.nav-link {
+  color: white;
+}
+
+.navbar-brand:hover,
+.nav-item:hover,
+.nav-link:hover {
+  color: rgb(165, 165, 165);
+}
+
 #navbar-finder {
   font-family: "Libre Baskerville", serif;
   font-style: initial;
+  background-color: black;
+  border-bottom: 2pt solid rgb(255, 248, 225);
+  margin-bottom: 20px;
 }
 </style>
