@@ -26,6 +26,21 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.post('/logout', async (req, res) => {
+  await req.logout();
+  if (!req.isAuthenticated()) {
+    res.status(200).send({
+      status: 200,
+      message: 'logout successful',
+    });
+  } else {
+    res.status(400).send({
+      status: 400,
+      message: 'logout unsuccessful',
+    });
+  }
+});
+
 router.post('/register', (req, res) => {
   const { username, password, email } = req.body;
   User.register({ username, email }, password, (err, newUser) => {
@@ -51,6 +66,7 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/user', (req, res) => {
+  console.log(req.user);
   if (!req.isAuthenticated()) {
     res.status(200).send({
       status: 200,

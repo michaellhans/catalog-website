@@ -1,63 +1,65 @@
-import AuthService from '@/services/AuthService'
+import AuthService from '@/services/AuthService';
 
 const state = {
   isLoggedIn: null,
   username: null,
-  accessToken: localStorage.getItem('accessToken') || null
-}
+  accessToken: localStorage.getItem('accessToken') || null,
+};
 
 const getters = {
-  getAuthStatus: state => state.isLoggedIn,
-  getAuthUsername: state => state.username
-}
+  getAuthStatus: (state) => state.isLoggedIn,
+  getAuthUsername: (state) => state.username,
+};
 
 const actions = {
-  async login({ dispatch }, userData ) {
+  async login({ dispatch }, userData) {
     try {
-      const resp = await AuthService.login(userData)
-      dispatch('initAuth')
-      return resp
+      const resp = await AuthService.login(userData);
+      dispatch('initAuth');
+      return resp;
     } catch (error) {
-      throw error
+      throw error;
     }
   },
 
-  logout({ commit }) {
-    commit('logout')
+  async logout({ commit }) {
+    try {
+      const resp = await AuthService.logout();
+      commit('logout');
+      return resp;
+    } catch (error) {
+      throw error;
+    }
   },
 
   initAuth({ commit }) {
-    AuthService.getAuthStatus()
-      .then(
-        (resp) => {
-          const { auth, username } = resp.data
-          if(auth === true) {
-            commit('login')
-            commit('setUsername', username )
-          }
-          else {
-            commit('logout')
-          }
-        }
-      )
-  }
-}
+    AuthService.getAuthStatus().then((resp) => {
+      const { auth, username } = resp.data;
+      if (auth === true) {
+        commit('login');
+        commit('setUsername', username);
+      } else {
+        commit('logout');
+      }
+    });
+  },
+};
 
 const mutations = {
   login: (state) => {
-    state.isLoggedIn = true
+    state.isLoggedIn = true;
   },
   logout: (state) => {
-    state.isLoggedIn = false
+    state.isLoggedIn = false;
   },
   setUsername: (state, username) => {
-    state.username = username
-  }
-}
+    state.username = username;
+  },
+};
 
 export default {
   state,
   getters,
   actions,
-  mutations
-}
+  mutations,
+};
