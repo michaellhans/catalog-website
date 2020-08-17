@@ -14,7 +14,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
       <br />
-      <div id="filterOption" class="row d-flex align-items-center">
+      <div class="filter-option row d-flex align-items-center">
         <div class="col-6 col-lg-3 mb-3 mb-lg-0">
           <select class="form-control-inline" width="20" v-model="searchBy">
             <option value="nama">Nama Buku</option>
@@ -56,7 +56,7 @@
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
         <Result
-          :header="['No', 'Nama', 'Kode Buku', 'Softcopy', 'Hardcopy', 'Instrumen']"
+          :header="['No', 'Nama', 'Kode Buku', 'Hardcopy', 'Softcopy', 'Instrumen']"
           :songs="books"
         />
         <PageNavigation
@@ -139,6 +139,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

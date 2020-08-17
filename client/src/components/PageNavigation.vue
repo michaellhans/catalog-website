@@ -1,20 +1,18 @@
 <template>
   <div class="d-flex justify-content-center align-items-center">
     <button
-      class="btn btn-primary"
+      class="add-navigation"
+      style="background: black;"
       v-on:click="prevPage"
       :disabled="totalPage === 1"
-    >
-      Prev
-    </button>
-    <p class="px-5 my-auto">Page {{ page }}/{{ totalPage }}</p>
+    >Prev</button>
+    <p class="px-5 my-auto">Page {{ page }} / {{ totalPage }}</p>
     <button
-      class="btn btn-primary"
+      class="add-navigation"
+      style="background: black;"
       v-on:click="nextPage"
       :disabled="totalPage === 1"
-    >
-      Next
-    </button>
+    >Next</button>
   </div>
 </template>
 
@@ -28,3 +26,6 @@ export default {
   },
 };
 </script>
+
+<style>
+</style>

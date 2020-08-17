@@ -42,6 +42,12 @@ export default {
   height: 300px;
   border-radius: 20px;
   opacity: 0.9;
+  box-shadow: 5px 5px 20px -1px rgb(0, 0, 0, 10);
+  transition: box-shadow 500ms;
+}
+
+#headline:hover {
+  box-shadow: 5px 5px 20px 10px rgb(0, 0, 0, 10);
 }
 
 #headline-header {
