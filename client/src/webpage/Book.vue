@@ -14,7 +14,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
       <br />
-      <div id="filterOption" class="row d-flex align-items-center">
+      <div class="filter-option row d-flex align-items-center">
         <div class="col-6 col-lg-3 mb-3 mb-lg-0">
           <Selection
             :items="['nama', 'kode']"
@@ -140,6 +140,7 @@ export default {
   },
 };
 </script>
+<<<<<<< HEAD
 
 <style>
 #BooksPage {
@@ -180,3 +181,5 @@ export default {
   padding: 10px;
 }
 </style>
+=======
+>>>>>>> fecf6d81ede8d333966901d7c9d8ceb1cc4ae4bd

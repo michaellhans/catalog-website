@@ -54,4 +54,9 @@ export default {
 table {
   margin-bottom: 50px;
 }
+
+.table-striped > tbody > tr:hover,
+.table-striped > tbody > tr:hover {
+  background-color: #ffffe7;
+}
 </style>

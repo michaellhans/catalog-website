@@ -24,7 +24,7 @@
               <router-link class="nav-link" to="/song">Songs</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/add">Add</router-link>
+              <router-link class="nav-link" to="/add" v-if="getAuthStatus === true">Add</router-link>
             </li>
           </ul>
         </div>
@@ -66,8 +66,8 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap");
 
 .navbar {
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .navbar-custom {

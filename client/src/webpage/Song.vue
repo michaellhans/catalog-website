@@ -14,7 +14,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
       <br />
-      <div id="filterOption" class="row d-flex align-items-center">
+      <div class="filter-option row d-flex align-items-center">
         <div class="col-6 col-lg-3 mb-3 mb-lg-0">
           <Selection
             selectionFor="jenis aransemen"
@@ -162,6 +162,8 @@ export default {
 
 #filterOption {
   background-color: rgb(247, 243, 243);
+  border: 0px solid;
+  border-radius: 10px;
   padding: 10px;
 }
 </style>
