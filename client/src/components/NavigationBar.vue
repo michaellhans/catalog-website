@@ -1,9 +1,7 @@
 <template>
-  <div>
+  <div id="navbar-finder">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <router-link class="navbar-brand" to="/">
-        Book Finder
-      </router-link>
+      <router-link class="navbar-brand" to="/">Book Finder</router-link>
       <button
         class="navbar-toggler ml-auto"
         type="button"
@@ -16,10 +14,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div
-        class="navbar-collapse justify-content-between"
-        id="navbarSupportedContent"
-      >
+      <div class="navbar-collapse justify-content-between" id="navbarSupportedContent">
         <div class="navbar-nav">
           <ul class="navbar-nav">
             <li class="nav-item">
@@ -35,25 +30,11 @@
         </div>
         <div class="navbar-nav ml-auto">
           <ul class="navbar-nav">
-            <a
-              class="nav-link"
-              target="_blank"
-              href="https://www.instagram.com/itborchestra/"
-            >
-              <i
-                class="fa fa-instagram"
-                style="font-size:25px; margin-right:5px;"
-              ></i>
+            <a class="nav-link" target="_blank" href="https://www.instagram.com/itborchestra/">
+              <i class="fa fa-instagram" style="font-size:25px; margin-right:5px;"></i>
             </a>
-            <a
-              class="nav-link"
-              target="_blank"
-              href="https://www.youtube.com/user/mediaISO"
-            >
-              <i
-                class="fa fa-youtube-square"
-                style="font-size:25px; margin-right:10px;"
-              ></i>
+            <a class="nav-link" target="_blank" href="https://www.youtube.com/user/mediaISO">
+              <i class="fa fa-youtube-square" style="font-size:25px; margin-right:10px;"></i>
             </a>
 
             <li>
@@ -63,12 +44,7 @@
             </li>
 
             <li>
-              <router-link
-                class="nav-link"
-                to="/register"
-                v-if="getAuthStatus === true"
-                >Add Account</router-link
-              >
+              <router-link class="nav-link" to="/register" v-if="getAuthStatus === true">Add Account</router-link>
             </li>
           </ul>
         </div>
@@ -78,11 +54,26 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(['getAuthStatus']),
+    ...mapGetters(["getAuthStatus"]),
   },
 };
 </script>
+
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap");
+
+.navbar {
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+#navbar-finder {
+  font-family: "Libre Baskerville", serif;
+  font-style: initial;
+}
+</style>

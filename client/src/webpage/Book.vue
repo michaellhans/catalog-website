@@ -1,9 +1,7 @@
 <template>
   <div id="BooksPage">
-    <h1>
-      <p style="text-align=left">ISO Book Finder</p>
-    </h1>
     <b-container>
+      <TitleSpace :titleValue="'ISO Book Finder'"></TitleSpace>
       <div class="d-flex">
         <input
           class="form-control d-inline mr-sm-2"
@@ -13,12 +11,7 @@
           aria-label="Search"
           size="120"
         />
-        <button
-          class="btn btn-outline-success my-2 my-sm-0"
-          v-on:click="search"
-        >
-          Search
-        </button>
+        <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
       <br />
       <div class="row d-flex align-items-center">
@@ -62,28 +55,10 @@
       >Menampilkan {{ books.length }} hasil pencarian buku</label>
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
-        <table class="table table-striped mt-3">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Nama</th>
-              <th scope="col">Kode</th>
-              <th scope="col">Hardcopy</th>
-              <th scope="col">Softcopy</th>
-              <th scope="col">Instrumen</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(book, index) in books" :key="book._id">
-              <th scope="row">{{ index + 1 }}</th>
-              <td>{{ book.nama }}</td>
-              <td>{{ book.kode }}</td>
-              <td>{{ book.hardcopy }}</td>
-              <td>{{ book.softcopy }}</td>
-              <td>{{ book.instrumen }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <Result
+          :header="['No', 'Nama', 'Kode Buku', 'Softcopy', 'Hardcopy', 'Instrumen']"
+          :songs="books"
+        />
         <PageNavigation
           :prevPage="prevPage"
           :nextPage="nextPage"
@@ -96,26 +71,30 @@
 </template>
 
 <script>
-import SearchBar from '@/components/SearchBar';
-import InstrumenCheckBox from '@/components/InstrumenCheckBox';
-import Loading from '@/components/Loading';
-import PageNavigation from '@/components/PageNavigation';
+import TitleSpace from "@/components/TitleSpace";
+import SearchBar from "@/components/SearchBar";
+import InstrumenCheckBox from "@/components/InstrumenCheckBox";
+import Loading from "@/components/Loading";
+import PageNavigation from "@/components/PageNavigation";
+import Result from "@/components/Result";
 
-import BookService from '@/services/BookService';
+import BookService from "@/services/BookService";
 
 export default {
   components: {
+    TitleSpace,
     SearchBar,
     InstrumenCheckBox,
     Loading,
     PageNavigation,
+    Result,
   },
   data() {
     return {
-      searchValue: '',
-      instruments: '',
+      searchValue: "",
+      instruments: "",
       copyCondition: [],
-      searchBy: 'nama',
+      searchBy: "nama",
       hasSearched: false,
       query: {},
       books: null,
@@ -150,8 +129,8 @@ export default {
         query: this.searchValue,
         instrumen: this.instruments,
         searchBy: this.searchBy,
-        softcopy: this.copyCondition.includes('softcopy'),
-        hardcopy: this.copyCondition.includes('hardcopy'),
+        softcopy: this.copyCondition.includes("softcopy"),
+        hardcopy: this.copyCondition.includes("hardcopy"),
         page: this.page,
       };
       this.getBooks();
@@ -165,7 +144,7 @@ export default {
 
 <style>
 #BooksPage {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

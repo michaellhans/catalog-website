@@ -1,8 +1,6 @@
 <template>
   <div id="SongsPage">
-    <h1>
-      <p style="text-align=left">ISO Song Finder</p>
-    </h1>
+    <TitleSpace :titleValue="'ISO Song Finder'" />
     <b-container>
       <div class="d-flex">
         <input
@@ -13,12 +11,7 @@
           aria-label="Search"
           size="120"
         />
-        <button
-          class="btn btn-outline-success my-2 my-sm-0"
-          v-on:click="search"
-        >
-          Search
-        </button>
+        <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
       <br />
       <div class="row d-flex align-items-center">
@@ -68,26 +61,7 @@
       >Menampilkan {{ songs.length }} hasil pencarian buku</label>
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
-        <table class="table table-striped mt-3">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Nama</th>
-              <th scope="col" class="d-none d-md-table-cell">Aransemen</th>
-              <th scope="col">Klasik</th>
-              <th scope="col">Instrumen</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(song, index) in songs" :key="song._id">
-              <th scope="row">{{ index + 1 }}</th>
-              <td>{{ song.nama }}</td>
-              <td class="d-none d-md-table-cell">{{ song.jenisAransemen }}</td>
-              <td>{{ song.klasik }}</td>
-              <td>{{ song.instrumen }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <Result :header="['No', 'Nama', 'Aransemen', 'Klasik', 'Instrumen']" :songs="songs" />
         <PageNavigation
           :prevPage="prevPage"
           :nextPage="nextPage"
@@ -100,27 +74,31 @@
 </template>
 
 <script>
-import SearchBar from '@/components/SearchBar';
-import InstrumenCheckBox from '@/components/InstrumenCheckBox';
-import Loading from '@/components/Loading';
-import PageNavigation from '@/components/PageNavigation';
+import TitleSpace from "@/components/TitleSpace";
+import SearchBar from "@/components/SearchBar";
+import InstrumenCheckBox from "@/components/InstrumenCheckBox";
+import Loading from "@/components/Loading";
+import PageNavigation from "@/components/PageNavigation";
+import Result from "@/components/Result";
 
-import SongService from '@/services/SongService';
+import SongService from "@/services/SongService";
 
 export default {
   components: {
+    TitleSpace,
     SearchBar,
     InstrumenCheckBox,
     Loading,
     PageNavigation,
+    Result,
   },
   // Container for arrayInput from input box, process boolean, and charArray
   data() {
     return {
-      searchValue: '',
+      searchValue: "",
       songs: null,
       hasSearched: false,
-      instruments: '',
+      instruments: "",
       isKlasik: true,
       jenisAransemen: null,
       query: {},
@@ -169,7 +147,7 @@ export default {
 
 <style>
 #SongsPage {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
