@@ -7,7 +7,7 @@
           class="form-control d-inline mr-sm-2"
           v-model="searchValue"
           type="search"
-          placeholder="Tulis Nama Lagu"
+          placeholder="Ketik nama lagu"
           aria-label="Search"
           size="120"
         />
@@ -67,7 +67,6 @@
 
 <script>
 import TitleSpace from "@/components/TitleSpace";
-import SearchBar from "@/components/SearchBar";
 import InstrumenCheckBox from "@/components/InstrumenCheckBox";
 import Loading from "@/components/Loading";
 import PageNavigation from "@/components/PageNavigation";
@@ -79,7 +78,6 @@ import SongService from "@/services/SongService";
 export default {
   components: {
     TitleSpace,
-    SearchBar,
     InstrumenCheckBox,
     Loading,
     PageNavigation,

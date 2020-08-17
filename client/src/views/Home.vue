@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <b-jumbotron bg-variant="secondary" text-variant="white" border-variant="dark">
+    <div id="headline">
+      <label id="headline-header">ISO BOOK FINDER</label>
+      <br />
+      <label id="headline-content">
+        This application is made for librarian to add/remove song and
+        <br />for members
+        of ITB Student Orchestra to find their favorite song!
+      </label>
       <div
         class="alert alert-success"
         v-if="getAuthStatus === true"
       >Welcome admin {{ getAuthUsername }}!</div>
-
-      <template v-slot:header>Welcome to ISO Song Finder!</template>
-
-      <template v-slot:lead>
-        This application is made for librarian to add/remove song and for members
-        of ITB Student Orchestra to find their favorite song!
-      </template>
-    </b-jumbotron>
+    </div>
   </div>
 </template>
 
@@ -26,9 +26,32 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+
 .home {
-  padding-top: 130px;
-  padding-bottom: 130px;
-  height: 700px;
+  padding-top: 100px;
+  padding-bottom: 0px;
+  width: 80%;
+  min-height: 700px;
+  font-family: "Merriweather", serif;
+  margin: auto;
+}
+
+#headline {
+  background: white;
+  height: 300px;
+  border-radius: 20px;
+  opacity: 0.9;
+}
+
+#headline-header {
+  font-size: 75px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#headline-content {
+  font-size: 20px;
+  text-align: center;
 }
 </style>
