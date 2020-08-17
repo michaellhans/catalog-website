@@ -8,7 +8,7 @@
         <!--  -->
         <i v-if="data.value === true" class="fa fa-check" aria-hidden="true"></i>
         <i v-else-if="data.value === false" class="fa fa-times" aria-hidden="true"></i>
-        <label v-else>{{ data.value }}</label>
+        <label v-else v-html="data.value"></label>
       </template>
     </b-table>
     <!-- <table class="table table-striped mt-3" v-if="items.length > 0">
