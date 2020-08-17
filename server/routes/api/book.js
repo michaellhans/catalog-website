@@ -9,7 +9,7 @@ const Book = require(__basedir + '/model/Book');
 
 // Index
 router.get('/', async (req, res) => {
-  const { page } = req.query;
+  const page = req.query.page ?? 1;
 
   const books = await Book.paginate({}, { page, limit: Util.docsPerPage });
   res.send(books);

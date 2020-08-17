@@ -13,29 +13,16 @@
           aria-label="Search"
           size="120"
         />
-        <button
-          class="btn btn-outline-success my-2 my-sm-0"
-          v-on:click="search"
-        >
-          Search
-        </button>
+        <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
       <br />
       <div class="row d-flex align-items-center">
         <div class="col-6 col-lg-3 mb-3 mb-lg-0">
-          <select
-            class="form-control-inline"
-            width="20"
-            v-model="jenisAransemen"
-            aria-placeholder="Jenis Aransemen"
-          >
-            <option :value="null">No Filter</option>
-            <option value="Aransemen ISO">Aransemen ISO</option>
-            <option value="Aransemen Non-ISO">Aransemen Non-ISO</option>
-            <option value="Komposisi ISO">Komposisi ISO</option>
-            <option value="Komposisi Non-ISO">Komposisi Non-ISO</option>
-            <option value="Job">Job</option>
-          </select>
+          <Selection
+            selectionFor="jenis aransemen"
+            :items="['Aransemen Non-ISO', 'Komposisi ISO', 'Komposisi Non-ISO', 'Job']"
+            @selected="updateJenisAransemen"
+          />
         </div>
         <div class="col-6 col-lg-2 d-flex flex-column">
           <div class="form-check-inline">
@@ -68,26 +55,14 @@
       >Menampilkan {{ songs.length }} hasil pencarian buku</label>
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
-        <table class="table table-striped mt-3">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Nama</th>
-              <th scope="col" class="d-none d-md-table-cell">Aransemen</th>
-              <th scope="col">Klasik</th>
-              <th scope="col">Instrumen</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(song, index) in songs" :key="song._id">
-              <th scope="row">{{ index + 1 }}</th>
-              <td>{{ song.nama }}</td>
-              <td class="d-none d-md-table-cell">{{ song.jenisAransemen }}</td>
-              <td>{{ song.klasik }}</td>
-              <td>{{ song.instrumen }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <b-table
+          :items="books"
+          :fields="['no','nama', 'kode', 'hardcopy', 'softcopy', 'instrumen']"
+          striped
+          thead-class="thead-dark"
+        >
+          <template v-slot:cell(no)="data">{{data.index + 1}}</template>
+        </b-table>
         <PageNavigation
           :prevPage="prevPage"
           :nextPage="nextPage"
@@ -100,12 +75,13 @@
 </template>
 
 <script>
-import SearchBar from '@/components/SearchBar';
-import InstrumenCheckBox from '@/components/InstrumenCheckBox';
-import Loading from '@/components/Loading';
-import PageNavigation from '@/components/PageNavigation';
+import SearchBar from "@/components/SearchBar";
+import InstrumenCheckBox from "@/components/InstrumenCheckBox";
+import Loading from "@/components/Loading";
+import PageNavigation from "@/components/PageNavigation";
+import Selection from "@/components/Selection";
 
-import SongService from '@/services/SongService';
+import SongService from "@/services/SongService";
 
 export default {
   components: {
@@ -113,14 +89,15 @@ export default {
     InstrumenCheckBox,
     Loading,
     PageNavigation,
+    Selection,
   },
   // Container for arrayInput from input box, process boolean, and charArray
   data() {
     return {
-      searchValue: '',
+      searchValue: "",
       songs: null,
       hasSearched: false,
-      instruments: '',
+      instruments: "",
       isKlasik: true,
       jenisAransemen: null,
       query: {},
@@ -141,6 +118,9 @@ export default {
     },
     updateInstrumentList(val) {
       this.instruments = val;
+    },
+    updateJenisAransemen(jenisAransemen) {
+      this.jenisAransemen = jenisAransemen;
     },
     search() {
       this.page = 1;
@@ -169,7 +149,7 @@ export default {
 
 <style>
 #SongsPage {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
