@@ -57,6 +57,10 @@ export default {
           name: "Percussion",
           value: "p",
         },
+        {
+          name: "Lain-Lain",
+          value: "L",
+        },
       ],
       checkedInstrument: [],
     };

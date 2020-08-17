@@ -1,9 +1,7 @@
 <template>
-  <div id="BooksPage">
-    <h1>
-      <p style="text-align=left">ISO Book Finder</p>
-    </h1>
+  <div class="normal-page">
     <b-container>
+      <TitleSpace :titleValue="'ISO Book Finder'"></TitleSpace>
       <div class="d-flex">
         <input
           class="form-control d-inline mr-sm-2"
@@ -16,7 +14,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
       <br />
-      <div class="row d-flex align-items-center">
+      <div id="filterOption" class="row d-flex align-items-center">
         <div class="col-6 col-lg-3 mb-3 mb-lg-0">
           <Selection
             :items="['nama', 'kode']"
@@ -58,14 +56,10 @@
       >Menampilkan {{ books.length }} hasil pencarian buku</label>
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
-        <b-table
-          :items="books"
-          :fields="['no','nama', 'kode', 'hardcopy', 'softcopy', 'instrumen']"
-          striped
-          thead-class="thead-dark"
-        >
-          <template v-slot:cell(no)="data">{{data.index + 1}}</template>
-        </b-table>
+        <Result
+          :header="['No', 'Nama', 'Kode Buku', 'Softcopy', 'Hardcopy', 'Instrumen']"
+          :songs="books"
+        />
       </div>
       <div v-if="searching === false">
         <PageNavigation :totalPage="totalPage" @changePage="changePage" :key="searching" />
@@ -75,21 +69,25 @@
 </template>
 
 <script>
+import TitleSpace from "@/components/TitleSpace";
 import SearchBar from "@/components/SearchBar";
 import InstrumenCheckBox from "@/components/InstrumenCheckBox";
 import Loading from "@/components/Loading";
 import PageNavigation from "@/components/PageNavigation";
 import Selection from "@/components/Selection";
+import Result from "@/components/Result";
 
 import BookService from "@/services/BookService";
 
 export default {
   components: {
+    TitleSpace,
     SearchBar,
     InstrumenCheckBox,
     Loading,
     PageNavigation,
     Selection,
+    Result,
   },
   data() {
     return {

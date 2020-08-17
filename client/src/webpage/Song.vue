@@ -1,8 +1,6 @@
 <template>
-  <div id="SongsPage">
-    <h1>
-      <p style="text-align=left">ISO Song Finder</p>
-    </h1>
+  <div class="normal-page">
+    <TitleSpace :titleValue="'ISO Song Finder'" />
     <b-container>
       <div class="d-flex">
         <input
@@ -16,7 +14,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
       </div>
       <br />
-      <div class="row d-flex align-items-center">
+      <div id="filterOption" class="row d-flex align-items-center">
         <div class="col-6 col-lg-3 mb-3 mb-lg-0">
           <Selection
             selectionFor="jenis aransemen"
@@ -55,14 +53,7 @@
       >Menampilkan {{ songs.length }} hasil pencarian buku</label>
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
-        <b-table
-          :items="books"
-          :fields="['no','nama', 'kode', 'hardcopy', 'softcopy', 'instrumen']"
-          striped
-          thead-class="thead-dark"
-        >
-          <template v-slot:cell(no)="data">{{data.index + 1}}</template>
-        </b-table>
+        <Result :header="['No', 'Nama', 'Aransemen', 'Klasik', 'Instrumen']" :songs="songs" />
         <PageNavigation
           :prevPage="prevPage"
           :nextPage="nextPage"
@@ -75,21 +66,25 @@
 </template>
 
 <script>
+import TitleSpace from "@/components/TitleSpace";
 import SearchBar from "@/components/SearchBar";
 import InstrumenCheckBox from "@/components/InstrumenCheckBox";
 import Loading from "@/components/Loading";
 import PageNavigation from "@/components/PageNavigation";
 import Selection from "@/components/Selection";
+import Result from "@/components/Result";
 
 import SongService from "@/services/SongService";
 
 export default {
   components: {
+    TitleSpace,
     SearchBar,
     InstrumenCheckBox,
     Loading,
     PageNavigation,
     Selection,
+    Result,
   },
   // Container for arrayInput from input box, process boolean, and charArray
   data() {
@@ -173,7 +168,7 @@ export default {
   width: 200px;
 }
 
-.row {
+#filterOption {
   background-color: rgb(247, 243, 243);
   padding: 10px;
 }
