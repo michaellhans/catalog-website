@@ -7,7 +7,7 @@
           class="form-control d-inline mr-sm-2"
           v-model="searchValue"
           type="search"
-          :placeholder="`Tulis ${searchBy} buku`"
+          :placeholder="`Ketik ${searchBy} buku`"
           aria-label="Search"
           size="120"
         />
@@ -72,7 +72,6 @@
 
 <script>
 import TitleSpace from "@/components/TitleSpace";
-import SearchBar from "@/components/SearchBar";
 import InstrumenCheckBox from "@/components/InstrumenCheckBox";
 import Loading from "@/components/Loading";
 import PageNavigation from "@/components/PageNavigation";
@@ -83,7 +82,6 @@ import BookService from "@/services/BookService";
 export default {
   components: {
     TitleSpace,
-    SearchBar,
     InstrumenCheckBox,
     Loading,
     PageNavigation,

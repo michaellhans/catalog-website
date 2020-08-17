@@ -67,6 +67,7 @@ export default {
   width: 80%;
   margin: auto;
   min-height: 700px;
+  border-radius: 10px;
 }
 
 #booksLayout {
