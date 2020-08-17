@@ -53,15 +53,15 @@
       <label
         style="margin-top: 10px; font-size: 14px"
         v-if="loading === false"
-      >Menampilkan {{ books.length }} hasil pencarian buku</label>
+      >Ada {{ totalBook }} hasil pencarian buku</label>
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
         <Result
-          :header="['No', 'Nama', 'Kode Buku', 'Softcopy', 'Hardcopy', 'Instrumen']"
-          :songs="books"
+          :header="['no', 'nama', 'kode', 'softcopy', 'hardcopy', 'instrumen']"
+          :items="books"
         />
       </div>
-      <div v-if="searching === false">
+      <div v-if="(searching === false) && (totalPage > 1)">
         <PageNavigation :totalPage="totalPage" @changePage="changePage" :key="searching" />
       </div>
     </b-container>
@@ -98,6 +98,7 @@ export default {
       books: null,
       loading: true,
       totalPage: null,
+      totalBook: null,
     };
   },
   methods: {
@@ -113,8 +114,10 @@ export default {
           page: pageNumber,
         })
       ).data;
+      this.totalBook = response.total;
       this.books = response.docs;
-      this.totalPage = Math.ceil(response.total / response.limit);
+      console.log(this.books);
+      this.totalPage = response.pages;
       this.loading = false;
     },
     changePage(pageNumber) {

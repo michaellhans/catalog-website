@@ -9,13 +9,9 @@ class SongService {
   }
 
   //find
-  static async search(song, page = 1) {
-    const params = {
-      ...song,
-      page,
-    };
+  static async search(song) {
     const res = axios.get(`${url}/nama`, {
-      params,
+      params: song,
     });
     return res;
   }

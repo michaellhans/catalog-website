@@ -18,8 +18,8 @@ router.get('/', async (req, res) => {
 router.get('/nama', async (req, res) => {
   let { nama, klasik, instrumen, jenisAransemen, page } = req.query;
   let searchQuery = {
-    nama: new RegExp(nama),
-    instrumen: new RegExp(instrumen),
+    nama: new RegExp(nama, 'i'),
+    instrumen: new RegExp(instrumen, 'i'),
     klasik,
   };
 

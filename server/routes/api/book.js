@@ -19,8 +19,8 @@ router.get('/', async (req, res) => {
 router.get('/nama', async (req, res) => {
   let { nama, hardcopy, softcopy, instrumen, page } = req.query;
   let searchQuery = {
-    nama: new RegExp(nama),
-    instrumen: new RegExp(instrumen),
+    nama: new RegExp(nama, 'i'),
+    instrumen: new RegExp(instrumen, 'i'),
   };
   if (hardcopy) {
     searchQuery.hardcopy = hardcopy;
@@ -40,8 +40,8 @@ router.get('/nama', async (req, res) => {
 router.get('/kode', async (req, res) => {
   let { kode, hardcopy, softcopy, instrumen, page } = req.query;
   let searchQuery = {
-    kode: new RegExp(kode),
-    instrumen: new RegExp(instrumen),
+    kode: new RegExp(kode, 'i'),
+    instrumen: new RegExp(instrumen, 'i'),
   };
 
   if (hardcopy) {

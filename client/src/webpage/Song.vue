@@ -50,16 +50,13 @@
       <label
         style="margin-top: 10px; font-size: 14px"
         v-if="loading === false"
-      >Menampilkan {{ songs.length }} hasil pencarian buku</label>
+      >Ada {{ totalSong }} hasil pencarian buku</label>
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
-        <Result :header="['No', 'Nama', 'Aransemen', 'Klasik', 'Instrumen']" :songs="songs" />
-        <PageNavigation
-          :prevPage="prevPage"
-          :nextPage="nextPage"
-          :page="page"
-          :totalPage="totalPage"
-        />
+        <Result :header="['no', 'nama', 'jenisAransemen', 'klasik', 'instrumen']" :items="songs" />
+      </div>
+      <div v-if="(searching === false) && (totalPage > 1)">
+        <PageNavigation :totalPage="totalPage" @changePage="changePage" :key="searching" />
       </div>
     </b-container>
   </div>
@@ -89,24 +86,31 @@ export default {
     return {
       searchValue: "",
       songs: null,
-      hasSearched: false,
       instruments: "",
       isKlasik: true,
       jenisAransemen: null,
-      query: {},
       loading: true,
-      page: 1,
       totalPage: 1,
+      totalSong: null,
+      searching: true,
     };
   },
   methods: {
-    async getSongs() {
+    async getSongs(pageNumber = 1) {
       this.loading = true;
-      const response = (await SongService.search(this.query)).data;
+      const response = (
+        await SongService.search({
+          nama: this.searchValue,
+          instrumen: this.instruments,
+          klasik: this.isKlasik,
+          jenisAransemen: this.jenisAransemen,
+          page: pageNumber,
+        })
+      ).data;
+      console.log(response);
       this.songs = response.docs;
-      this.totalPage = response.page;
-      this.totalPage = Math.ceil(response.total / response.limit);
-      this.hasSearched = true;
+      this.totalPage = response.pages;
+      this.totalSong = response.total;
       this.loading = false;
     },
     updateInstrumentList(val) {
@@ -115,23 +119,13 @@ export default {
     updateJenisAransemen(jenisAransemen) {
       this.jenisAransemen = jenisAransemen;
     },
-    search() {
-      this.page = 1;
-      this.query = {
-        nama: this.searchValue,
-        instrumen: this.instruments,
-        klasik: this.isKlasik,
-        jenisAransemen: this.jenisAransemen,
-      };
-      this.getSongs();
+    async search() {
+      this.searching = true;
+      await this.getSongs();
+      this.searching = false;
     },
-    nextPage() {
-      this.page = this.page === this.totalPage ? 1 : this.page + 1;
-      this.getSongs();
-    },
-    prevPage() {
-      this.page = this.page === 1 ? this.totalPage : this.page - 1;
-      this.getSongs();
+    async changePage(pageNumber) {
+      this.getSongs(pageNumber);
     },
   },
   async created() {
