@@ -23,5 +23,8 @@
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-local-mongoose": "^6.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4"
   }
 }
