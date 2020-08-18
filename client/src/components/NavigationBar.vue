@@ -106,6 +106,10 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
 
 .navbar {
+  position: fixed;
+  min-height: 50px;
+  width: 100%;
+  z-index: 99;
   padding-left: 10%;
   padding-right: 10%;
 }

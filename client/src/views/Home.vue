@@ -5,35 +5,33 @@
       <br />
       <label id="headline-content">
         This application is made for librarian to add/remove song and
-        <br />for members
-        of ITB Student Orchestra to find their favorite song!
+        <br />for members of ITB Student Orchestra to find their favorite song!
       </label>
-      <div
-        class="alert alert-success"
-        v-if="getAuthStatus === true"
-      >Welcome admin {{ getAuthUsername }}!</div>
+      <div class="alert alert-success" v-if="getAuthStatus === true">
+        Welcome admin {{ getAuthUsername }}!
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "Home",
-  computed: mapGetters(["getAuthStatus", "getAuthUsername"]),
+  name: 'Home',
+  computed: mapGetters(['getAuthStatus', 'getAuthUsername']),
 };
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 
 .home {
   padding-top: 100px;
   padding-bottom: 0px;
   width: 80%;
   min-height: 700px;
-  font-family: "Merriweather", serif;
+  font-family: 'Merriweather', serif;
   margin: auto;
 }
 
