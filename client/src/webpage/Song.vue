@@ -160,8 +160,8 @@ export default {
   width: 200px;
 }
 
-#filterOption {
-  background-color: rgb(247, 243, 243);
+.filter-option {
+  background-color: rgb(255, 248, 225);
   border: 0px solid;
   border-radius: 10px;
   padding: 10px;
