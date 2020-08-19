@@ -11,33 +11,19 @@
         <label v-else v-html="data.value"></label>
       </template>
     </b-table>
-    <!-- <table class="table table-striped mt-3" v-if="items.length > 0">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col" v-for="(colName) in header" :key="colName._id">{{ colName }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in items" :key="item._id">
-          <td v-for="(value, propertyName) in item" :key="value._id">
-            <i v-if="value === true" class="fa fa-check" aria-hidden="true"></i>
-            <i v-else-if="value === false" class="fa fa-times" aria-hidden="true"></i>
-            <label v-else-if="propertyName === '_id'">
-              <b>{{index + 1}}</b>
-            </label>
-            <label v-else>{{ value }}</label>
-          </td>
-        </tr>
-      </tbody>
-    </table>-->
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     header: Array,
     items: Array,
+  },
+  computed: {
+    ...mapGetters(["getAuthStatus"]),
   },
 };
 </script>
@@ -53,6 +39,10 @@ export default {
 
 table {
   margin-bottom: 50px;
+}
+
+.fa-trash {
+  color: red;
 }
 
 .table-striped > tbody > tr:hover,

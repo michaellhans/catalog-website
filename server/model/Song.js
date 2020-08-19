@@ -29,7 +29,7 @@ const songSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: function (val) {
-        const re = /^(P?G?S?B?W?s?p?){1}$/g;
+        const re = /^(P?G?S?B?W?s?p?L?){1}$/g;
         return re.test(val);
       },
       message: 'format string untuk instrumen tidak valid',

@@ -140,7 +140,6 @@ export default {
   },
 };
 </script>
-<<<<<<< HEAD
 
 <style>
 #BooksPage {
@@ -181,5 +180,3 @@ export default {
   padding: 10px;
 }
 </style>
-=======
->>>>>>> fecf6d81ede8d333966901d7c9d8ceb1cc4ae4bd
