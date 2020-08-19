@@ -50,7 +50,7 @@
       <label
         style="margin-top: 10px; font-size: 14px"
         v-if="loading === false"
-      >Ada {{ totalSong }} hasil pencarian buku</label>
+      >Ada {{ totalSong }} hasil pencarian lagu</label>
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
         <Result :header="['no', 'nama', 'jenisAransemen', 'klasik', 'instrumen']" :items="songs" />
