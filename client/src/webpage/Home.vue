@@ -1,39 +1,39 @@
 <template>
   <div class="home">
-    <div id="headline">
-      <div class="my-2">
-        <h1 id="headline-header">
-          ISO BOOK FINDER
-        </h1>
-      </div>
-      <p id="headline-content">
-        This application is made for librarian to add/remove song and
-        <br />for members of ITB Student Orchestra to find their favorite song!
-      </p>
-      <div class="alert alert-success" v-if="getAuthStatus === true">
-        Welcome admin {{ getAuthUsername }}!
+    <div id="headline" class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 id="headline-header">ISO BOOK FINDER</h1>
+        <p
+          id="headline-content"
+          class="lead"
+        >This application is made for librarian to add/remove song and for members of ITB Student Orchestra to find their favorite song!</p>
+        <div
+          class="alert alert-success"
+          v-if="getAuthStatus === true"
+        >Welcome admin {{ getAuthUsername }}!</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'Home',
-  computed: mapGetters(['getAuthStatus', 'getAuthUsername']),
+  name: "Home",
+  computed: mapGetters(["getAuthStatus", "getAuthUsername"]),
 };
 </script>
 
 <style>
 .home {
+  margin-top: 75px;
   font-family: var(--main-font);
 }
 
 #headline {
   background: white;
-  height: 300px;
+  min-height: 200px;
   border-radius: 20px;
   opacity: 0.9;
   display: flex;

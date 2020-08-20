@@ -1,5 +1,12 @@
 .web-page {
   background: white;
-  padding: 10px 0;
+  padding: 15px;
   border-radius: 20px;
+}
+
+.filter-option {
+  background: rgb(255, 247, 180);
+  padding: 10px;
+  border: 0px solid;
+  border-radius: 10px;
 }

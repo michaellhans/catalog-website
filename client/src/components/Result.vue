@@ -2,7 +2,9 @@
   <div class>
     <b-table :items="items" :fields="header" striped hover thead-class="thead-dark" class="mt-3">
       <!-- if the column name is "no" then data.index + 1 (numbering) -->
-      <template v-slot:cell(no)="data">{{ data.index + 1 }}</template>
+      <template v-slot:cell(no)="data">
+        <b>{{ data.index + 1 }}</b>
+      </template>
       <!-- default column -->
       <template v-slot:cell()="data">
         <!--  -->

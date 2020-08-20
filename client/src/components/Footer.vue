@@ -1,9 +1,7 @@
 <template>
   <footer class="d-flex justify-content-center align-items-center flex-column">
     <h6>Email: librarian.iso@gmail.com</h6>
-    <h6>
-      Copyright © {{ currentYear }} ITB Student Orchestra. All rights reserved.
-    </h6>
+    <h6>Copyright © {{ currentYear }} ITB Student Orchestra. All rights reserved.</h6>
   </footer>
 </template>
 
