@@ -13,11 +13,7 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div
-        class="navbar-collapse justify-content-between"
-        id="navbarSupportedContent"
-      >
+      <div class="navbar-collapse justify-content-between" id="navbarSupportedContent">
         <div class="navbar-nav">
           <ul class="navbar-nav">
             <li class="nav-item">
@@ -27,63 +23,29 @@
               <router-link class="nav-link" to="/song">Songs</router-link>
             </li>
             <li class="nav-item">
-              <router-link
-                class="nav-link"
-                to="/add"
-                v-if="getAuthStatus === true"
-                >Add</router-link
-              >
+              <router-link class="nav-link" to="/add" v-if="getAuthStatus === true">Add</router-link>
             </li>
           </ul>
         </div>
         <div class="navbar-nav ml-auto">
           <ul class="navbar-nav">
-            <a
-              class="nav-link"
-              target="_blank"
-              href="https://www.instagram.com/itborchestra/"
-            >
-              <i
-                class="fa fa-instagram"
-                style="font-size:25px; margin-right:5px;"
-              ></i>
+            <a class="nav-link" target="_blank" href="https://www.instagram.com/itborchestra/">
+              <i class="fa fa-instagram" style="font-size:25px; margin-right:5px;"></i>
             </a>
-            <a
-              class="nav-link"
-              target="_blank"
-              href="https://www.youtube.com/user/mediaISO"
-            >
-              <i
-                class="fa fa-youtube-square"
-                style="font-size:25px; margin-right:5px;"
-              ></i>
+            <a class="nav-link" target="_blank" href="https://www.youtube.com/user/mediaISO">
+              <i class="fa fa-youtube-square" style="font-size:25px; margin-right:5px;"></i>
             </a>
 
             <li>
-              <router-link
-                class="nav-link"
-                to="/login"
-                v-if="getAuthStatus === false"
-                >Login</router-link
-              >
+              <router-link class="nav-link" to="/login" v-if="getAuthStatus === false">Login</router-link>
             </li>
 
             <li>
-              <router-link
-                class="nav-link"
-                to="/register"
-                v-if="getAuthStatus === true"
-                >Add Account</router-link
-              >
+              <router-link class="nav-link" to="/register" v-if="getAuthStatus === true">Add Account</router-link>
             </li>
 
             <li>
-              <router-link
-                class="nav-link"
-                to="/logout"
-                v-if="getAuthStatus === true"
-                >Logout</router-link
-              >
+              <router-link class="nav-link" to="/logout" v-if="getAuthStatus === true">Logout</router-link>
             </li>
           </ul>
         </div>
@@ -93,17 +55,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(['getAuthStatus']),
+    ...mapGetters(["getAuthStatus"]),
   },
 };
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap");
 
 .navbar {
   position: fixed;
@@ -119,6 +81,15 @@ export default {
   color: white;
 }
 
+.navbar-toggler.collapsed {
+  background-color: rgb(255, 255, 255) !important;
+  color: red !important;
+}
+
+.navbar-toggler:hover {
+  background-color: rgb(238, 45, 45) !important;
+}
+
 .navbar-brand,
 .nav-item,
 .nav-link {
@@ -132,7 +103,7 @@ export default {
 }
 
 #navbar-finder {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-style: initial;
   background-color: black;
   border-bottom: 2pt solid rgb(255, 248, 225);
