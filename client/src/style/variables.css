@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+:root {
+  --main-font: 'Merriweather';
+  --text-font: 'Noto Sans JP';
+  --navbar-height: 75px;
+  --footer-height: 75px;
+}
+/*
+  This is the variables file, you can create a variable by using:
+  --<var-name>: <value>
+  syntax (remove <var-name> and <value> and swap them with real name and value
+  and use them in a file using syntax:
+  background-color: var(--main-color) (example)
+*/

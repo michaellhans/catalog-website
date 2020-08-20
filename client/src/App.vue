@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <NavigationBar />
-    <router-view class="router-view" />
+    <div id="content">
+      <router-view />
+    </div>
     <Footer />
   </div>
 </template>
@@ -28,12 +30,17 @@ export default {
   color: #2c3e50;
   margin: 0px;
   padding: 0px;
-  min-height: 100vh;
   background: url('assets/backgroundISO.png') fixed center;
   overflow-x: hidden;
 }
 
-#app > .router-view {
-  margin-top: 10vh;
+#content {
+  min-height: 100vh;
+  padding-top: calc(var(--navbar-height) + 10px);
+  padding-bottom: calc(var(--footer-height) + 10px);
+  text-align: center;
+  color: #2c3e50;
+  width: 80%;
+  margin: auto;
 }
 </style>

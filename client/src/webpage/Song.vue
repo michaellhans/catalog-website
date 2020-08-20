@@ -1,5 +1,5 @@
 <template>
-  <div class="normal-page">
+  <div class="web-page">
     <TitleSpace :titleValue="'ISO Song Finder'" />
     <b-container>
       <div class="d-flex">
@@ -11,14 +11,24 @@
           aria-label="Search"
           size="120"
         />
-        <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
+        <button
+          class="btn btn-outline-success my-2 my-sm-0"
+          v-on:click="search"
+        >
+          Search
+        </button>
       </div>
       <br />
       <div class="filter-option row d-flex align-items-center">
         <div class="col-6 col-lg-3 mb-3 mb-lg-0">
           <Selection
             selectionFor="jenis aransemen"
-            :items="['Aransemen Non-ISO', 'Komposisi ISO', 'Komposisi Non-ISO', 'Job']"
+            :items="[
+              'Aransemen Non-ISO',
+              'Komposisi ISO',
+              'Komposisi Non-ISO',
+              'Job',
+            ]"
             @selected="updateJenisAransemen"
           />
         </div>
@@ -47,30 +57,36 @@
         </div>
         <InstrumenCheckBox @checked="updateInstrumentList" />
       </div>
-      <label
-        style="margin-top: 10px; font-size: 14px"
-        v-if="loading === false"
-      >Ada {{ totalSong }} hasil pencarian lagu</label>
+      <label style="margin-top: 10px; font-size: 14px" v-if="loading === false"
+        >Ada {{ totalSong }} hasil pencarian lagu</label
+      >
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
-        <Result :header="['no', 'nama', 'jenisAransemen', 'klasik', 'instrumen']" :items="songs" />
+        <Result
+          :header="['no', 'nama', 'jenisAransemen', 'klasik', 'instrumen']"
+          :items="songs"
+        />
       </div>
-      <div v-if="(searching === false) && (totalPage > 1)">
-        <PageNavigation :totalPage="totalPage" @changePage="changePage" :key="searching" />
+      <div v-if="searching === false && totalPage > 1">
+        <PageNavigation
+          :totalPage="totalPage"
+          @changePage="changePage"
+          :key="searching"
+        />
       </div>
     </b-container>
   </div>
 </template>
 
 <script>
-import TitleSpace from "@/components/TitleSpace";
-import InstrumenCheckBox from "@/components/InstrumenCheckBox";
-import Loading from "@/components/Loading";
-import PageNavigation from "@/components/PageNavigation";
-import Selection from "@/components/Selection";
-import Result from "@/components/Result";
+import TitleSpace from '@/components/TitleSpace';
+import InstrumenCheckBox from '@/components/InstrumenCheckBox';
+import Loading from '@/components/Loading';
+import PageNavigation from '@/components/PageNavigation';
+import Selection from '@/components/Selection';
+import Result from '@/components/Result';
 
-import SongService from "@/services/SongService";
+import SongService from '@/services/SongService';
 
 export default {
   components: {
@@ -84,9 +100,9 @@ export default {
   // Container for arrayInput from input box, process boolean, and charArray
   data() {
     return {
-      searchValue: "",
+      searchValue: '',
       songs: null,
-      instruments: "",
+      instruments: '',
       isKlasik: true,
       jenisAransemen: null,
       loading: true,
@@ -133,37 +149,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#SongsPage {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 20px;
-}
-
-#cols-1 {
-  width: 20%;
-}
-
-#cols-2 {
-  width: 20%;
-}
-
-#cols-3 {
-  width: 60%;
-}
-
-#kind {
-  width: 200px;
-}
-
-.filter-option {
-  background-color: rgb(255, 248, 225);
-  border: 0px solid;
-  border-radius: 10px;
-  padding: 10px;
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="add-account">
+  <div>
     <b-container class="d-flex justify-content-center mt-3">
       <div class="card w-75">
         <div class="card-header">You sure you want to log out?</div>

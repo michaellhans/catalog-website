@@ -1,5 +1,5 @@
 <template>
-  <div class="normal-page">
+  <div class="web-page">
     <b-container>
       <TitleSpace :titleValue="'ISO Book Finder'"></TitleSpace>
       <div class="d-flex">
@@ -11,7 +11,12 @@
           aria-label="Search"
           size="120"
         />
-        <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="search">Search</button>
+        <button
+          class="btn btn-outline-success my-2 my-sm-0"
+          v-on:click="search"
+        >
+          Search
+        </button>
       </div>
       <br />
       <div class="filter-option row d-flex align-items-center">
@@ -50,10 +55,9 @@
         </div>
         <InstrumenCheckBox @checked="updateInstrumentList" />
       </div>
-      <label
-        style="margin-top: 10px; font-size: 14px"
-        v-if="loading === false"
-      >Ada {{ totalBook }} hasil pencarian buku</label>
+      <label style="margin-top: 10px; font-size: 14px" v-if="loading === false"
+        >Ada {{ totalBook }} hasil pencarian buku</label
+      >
       <Loading class="mx-auto mt-3" v-if="loading === true" />
       <div v-else>
         <Result
@@ -61,22 +65,26 @@
           :items="books"
         />
       </div>
-      <div v-if="(searching === false) && (totalPage > 1)">
-        <PageNavigation :totalPage="totalPage" @changePage="changePage" :key="searching" />
+      <div v-if="searching === false && totalPage > 1">
+        <PageNavigation
+          :totalPage="totalPage"
+          @changePage="changePage"
+          :key="searching"
+        />
       </div>
     </b-container>
   </div>
 </template>
 
 <script>
-import TitleSpace from "@/components/TitleSpace";
-import InstrumenCheckBox from "@/components/InstrumenCheckBox";
-import Loading from "@/components/Loading";
-import PageNavigation from "@/components/PageNavigation";
-import Selection from "@/components/Selection";
-import Result from "@/components/Result";
+import TitleSpace from '@/components/TitleSpace';
+import InstrumenCheckBox from '@/components/InstrumenCheckBox';
+import Loading from '@/components/Loading';
+import PageNavigation from '@/components/PageNavigation';
+import Selection from '@/components/Selection';
+import Result from '@/components/Result';
 
-import BookService from "@/services/BookService";
+import BookService from '@/services/BookService';
 
 export default {
   components: {
@@ -89,10 +97,10 @@ export default {
   },
   data() {
     return {
-      searchValue: "",
-      instruments: "",
+      searchValue: '',
+      instruments: '',
       copyCondition: [],
-      searchBy: "nama",
+      searchBy: 'nama',
       searching: true,
       query: {},
       books: null,
@@ -109,8 +117,8 @@ export default {
           query: this.searchValue,
           instrumen: this.instruments,
           searchBy: this.searchBy,
-          softcopy: this.copyCondition.includes("softcopy"),
-          hardcopy: this.copyCondition.includes("hardcopy"),
+          softcopy: this.copyCondition.includes('softcopy'),
+          hardcopy: this.copyCondition.includes('hardcopy'),
           page: pageNumber,
         })
       ).data;
@@ -140,43 +148,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#BooksPage {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 20px;
-}
-
-#cols-1-search {
-  width: 90%;
-}
-
-#cols-2-search {
-  width: 10%;
-}
-
-#cols-1 {
-  width: 13%;
-}
-
-#cols-2 {
-  width: 19%;
-}
-
-#cols-3 {
-  width: 68%;
-}
-
-#kind {
-  width: 130px;
-}
-
-#row-2 {
-  background-color: rgb(247, 243, 243);
-  padding: 10px;
-}
-</style>
