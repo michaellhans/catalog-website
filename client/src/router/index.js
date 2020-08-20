@@ -2,14 +2,14 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
 
-import Home from '@/views/Home.vue';
+import Home from '@/webpage/Home.vue';
 import Book from '@/webpage/Book.vue';
 import Song from '@/webpage/Song.vue';
 import Penambahan from '../webpage/Penambahan.vue';
 import Login from '@/webpage/auth/Login';
 import Logout from '@/webpage/auth/Logout';
-import NotAuthorized from '@/views/NotAuthorized';
-import AddAccount from '@/webpage/auth/AddAccount';
+import NotAuthorized from '@/webpage/NotAuthorized';
+import AddAdmin from '@/webpage/auth/AddAdmin';
 
 Vue.use(Router);
 
@@ -68,8 +68,8 @@ const routes = [
   },
   {
     path: '/register',
-    name: 'Add account',
-    component: AddAccount,
+    name: 'Add admin',
+    component: AddAdmin,
     beforeEnter: (to, from, next) => {
       if (!store.state.auth.isLoggedIn) {
         next('/403');

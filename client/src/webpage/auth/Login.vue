@@ -1,8 +1,10 @@
 <template>
-  <div id="add-account">
-    <b-container class="d-flex justify-content-center mt-3">
-      <div class="card w-75">
-        <div class="card-header">Login</div>
+  <div>
+    <b-container class="mt-3 w-75">
+      <div class="card mx-auto">
+        <div class="card-header ">
+          Login
+        </div>
         <div class="card-body">
           <b-alert show dismissible variant="danger" v-if="error != null"
             >Wrong Credential! Username or password is wrong</b-alert

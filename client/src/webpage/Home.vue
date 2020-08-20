@@ -1,12 +1,15 @@
 <template>
   <div class="home">
     <div id="headline">
-      <label id="headline-header">ISO BOOK FINDER</label>
-      <br />
-      <label id="headline-content">
+      <div class="my-2">
+        <h1 id="headline-header">
+          ISO BOOK FINDER
+        </h1>
+      </div>
+      <p id="headline-content">
         This application is made for librarian to add/remove song and
         <br />for members of ITB Student Orchestra to find their favorite song!
-      </label>
+      </p>
       <div class="alert alert-success" v-if="getAuthStatus === true">
         Welcome admin {{ getAuthUsername }}!
       </div>
@@ -24,15 +27,8 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
-
 .home {
-  padding-top: 100px;
-  padding-bottom: 0px;
-  width: 80%;
-  min-height: 700px;
-  font-family: 'Merriweather', serif;
-  margin: auto;
+  font-family: var(--main-font);
 }
 
 #headline {
@@ -40,6 +36,10 @@ export default {
   height: 300px;
   border-radius: 20px;
   opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   box-shadow: 5px 5px 20px -1px rgb(0, 0, 0, 10);
   transition: box-shadow 500ms;
 }
@@ -57,5 +57,6 @@ export default {
 #headline-content {
   font-size: 20px;
   text-align: center;
+  font-family: var(--text-font);
 }
 </style>

@@ -50,8 +50,8 @@
           </ul>
         </div>
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -65,15 +65,14 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap");
-
 .navbar {
   position: fixed;
-  min-height: 50px;
+  height: var(--navbar-height);
   width: 100%;
+  font-family: var(--main-font);
   z-index: 99;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding: 0 10%;
+  border-bottom: white;
 }
 
 .navbar-custom {
@@ -106,7 +105,5 @@ export default {
   font-family: "Libre Baskerville", serif;
   font-style: initial;
   background-color: black;
-  border-bottom: 2pt solid rgb(255, 248, 225);
-  margin-bottom: 20px;
 }
 </style>

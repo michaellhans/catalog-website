@@ -1,0 +1,12 @@
+/*
+  H1 ( title ) -> use sans serif variant
+  p ( paragraph ) -> use open sans variant
+*/
+
+h1 {
+  font-family: var(--main-font), serif;
+}
+
+p {
+  font-family: var(--text-font), Arial, Helvetica;
+}

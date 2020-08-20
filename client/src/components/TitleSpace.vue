@@ -1,7 +1,11 @@
 <template>
-  <h1 id="h1-title">
-    <p style="text-align=left; ">{{titleValue}}</p>
-  </h1>
+  <div class="my-3">
+    <h1 id="h1-title">
+      <b>
+        {{ titleValue }}
+      </b>
+    </h1>
+  </div>
 </template>
 
 <script>
@@ -13,9 +17,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
-
 #h1-title {
-  font-family: "Righteous", cursive;
+  font-family: var(--main-font), serif;
 }
 </style>
