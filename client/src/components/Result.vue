@@ -1,5 +1,5 @@
 <template>
-  <div class>
+  <div class="table-over">
     <b-table :items="items" :fields="header" striped hover thead-class="thead-dark" class="mt-3">
       <!-- if the column name is "no" then data.index + 1 (numbering) -->
       <template v-slot:cell(no)="data">
@@ -39,7 +39,8 @@ export default {
   color: red;
 }
 
-table {
+.table-over {
+  overflow-x: auto;
   margin-bottom: 50px;
 }
 

@@ -14,7 +14,12 @@
         <i class="fa fa-navicon" style="color:#fff; font-size:28px;"></i>
       </span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+      data-toggle="collapse"
+      data-target=".navbar-collapse"
+    >
       <div class="navbar-nav">
         <ul class="navbar-nav">
           <li class="nav-item">
