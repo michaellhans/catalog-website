@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000/api/song/';
+const url = 'api/song/';
 
 class SongService {
   // index
