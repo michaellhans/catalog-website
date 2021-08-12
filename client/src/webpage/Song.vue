@@ -24,6 +24,7 @@
           <Selection
             selectionFor="jenis aransemen"
             :items="[
+              'Aransemen ISO',
               'Aransemen Non-ISO',
               'Komposisi ISO',
               'Komposisi Non-ISO',
