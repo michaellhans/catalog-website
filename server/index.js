@@ -4,7 +4,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
+const YAML = require('yamljs');
 const User = require('./model/User');
+const swaggerUi = require('swagger-ui-express');
+const path = require('path');
 
 // set up
 const app = express();
@@ -44,6 +47,11 @@ passport.deserializeUser(function (id, done) {
 const songRoute = require(__basedir + '/routes/api/song');
 const bookRoute = require(__basedir + '/routes/api/book');
 const authRoute = require(__basedir + '/routes/api/auth');
+
+const swaggerDocument = YAML.load(
+  path.resolve(__dirname, 'documentation/swagger.yml')
+);
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req, res) => {
   res.send('try to visit the other path');
