@@ -1,0 +1,60 @@
+# Skema dari models
+definitions:
+  # The schema of Event
+  Song:
+    type: 'object'
+    required:
+      - 'name'
+      - 'description'
+      - 'originalFee'
+    properties:
+      name:
+        type: 'string'
+        description: 'The name of event'
+      description:
+        type: 'string'
+        description: 'The description of event'
+      originalFee:
+        type: 'number'
+        description: 'The original fee of event'
+  Book:
+    type: 'object'
+    required:
+      - 'name'
+      - 'description'
+      - 'originalFee'
+    properties:
+      apiVersion:
+        type: 'string'
+        description: 'Current api version of this method'
+      data:
+        $ref: '#/definitions/Event'
+
+# Buat rute api
+/api/song/create:
+  # methodnya
+  post:
+    tags:
+      - 'Featured'
+    summary: 'Return status of deleted files by id'
+    description: 'For the files which are not presented in public folder, it will return unkown'
+    produces:
+      - 'application/json'
+    parameters:
+      - name: 'featuredId'
+        in: 'path'
+        description: 'ID of the featured file that needs to be deleted'
+        required: true
+        type: 'integer'
+        format: 'int64'
+    security:
+      - api_key: []
+    responses:
+      '200':
+        description: 'Success delete featured'
+        schema:
+          $ref: '#/definitions/DeleteResponse'
+      '400':
+        description: 'Invalid response url'
+        schema:
+          $ref: '#/definitions/400ErrorResponse'
