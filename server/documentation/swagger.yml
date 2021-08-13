@@ -10,124 +10,199 @@ info:
     name: 'Apache 2.0'
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 host: 'http://catalog-finder.herokuapp.com/'
-basePath: '/api/'
+basePath: '/api'
 schemes:
   - 'http'
   - 'https'
 
 paths:
-  /admin/events/{eventId}/files:
-    delete:
+  # AUTH
+  /auth/login:
+    post:
       tags:
-        - 'Events'
-      summary: 'Return status of deleted event files image by id'
-      description: 'For the files which are not presented in public folder, it will return unknown'
+        - 'Auth'
+      summary: 'Log in to access admin privileges (add/delete song or books)'
       produces:
         - 'application/json'
       parameters:
-        - name: 'eventId'
-          in: 'path'
-          description: 'ID of event whose file you want to delete'
+        - name: 'username'
+          in: 'body'
+          description: User's username
           required: true
-          type: 'integer'
-          format: 'int64'
-      security:
-        - api_key: []
+          type: string
+        - name: 'password'
+          in: 'body'
+          description: User's password
+          required: true
+          type: string
       responses:
         '200':
-          description: 'Success delete file'
+          description: 'Successful Login'
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            $ref: '#/definitions/LoginResponse'
+        '401':
+          description: 'Wrong Credentials'
+          schema:
+            $ref: '#/definitions/CredentialErrorResponse'
+  /auth/logout:
+    post:
+      tags:
+        - 'Auth'
+      summary: 'Log out from the app'
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'Successful Logout'
+          schema:
+            $ref: '#/definitions/LogoutResponse'
+        '400':
+          description: 'Unsuccessful logout, maybe because user have not logged in'
+          schema:
+            $ref: '#/definitions/CredentialErrorResponse'
+  /auth/register:
+    post:
+      tags:
+        - 'Auth'
+      summary: 'Register a user to the application'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'username'
+          in: 'body'
+          description: User's username
+          required: true
+          type: string
+        - name: 'password'
+          in: 'body'
+          description: User's password
+          required: true
+          type: string
+        - name: 'email'
+          in: 'body'
+          description: User's email
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Successful Register'
+          schema:
+            $ref: '#/definitions/RegisterResponse'
+        '401':
+          description: 'Unsuccessful register'
+          schema:
+            $ref: '#/definitions/CredentialErrorResponse'
+
+  # SONG
+  /song:
+    get:
+      tags:
+        - Song
+      summary: Get paginated songs
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          in: query
+          description: Get songs on page X, items per page is 10
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Successful GET Request'
+          schema:
+            $ref: '#/definitions/GetSongResponse'
+        '401':
+          description: 'Unsuccessful register'
+          schema:
+            $ref: '#/definitions/CredentialErrorResponse'
 
 definitions:
-  # The schema of Event
-  DeleteResponse:
-    type: 'object'
-    required:
-      - 'name'
-      - 'description'
-      - 'originalFee'
-      - 'actualFee'
-      - 'startedAt'
-      - 'endedAt'
-      - 'vendor'
+  Song:
+    type: object
     properties:
-      name:
-        type: 'string'
-        description: 'The name of event'
-      description:
-        type: 'string'
-        description: 'The description of event'
-      originalFee:
-        type: 'number'
-        description: 'The original fee of event'
-      actualFee:
-        type: 'number'
-        description: 'The fee of event after discount'
-      startedAt:
-        type: 'string'
-        description: 'The start date of event on local time'
-      endedAt:
-        type: 'string'
-        description: 'The end date of event on local time'
-      vendor:
-        type: 'string'
-        description: 'The name of event organizer'
-      slug:
-        type: 'string'
-        description: 'The name of event with url safety'
-      publicId:
-        type: 'string'
-        description: 'The event Id for public'
-      wowzaLivestreamID:
-        type: 'string'
-        description: 'LivestreamId inside Wowza Streaming Cloud'
-      wowzaLivestreamSecret:
-        type: 'string'
-        description: 'Secret key is Shared Secret for generating Token Authentication'
-      wowzaLivestreamURL:
-        type: 'string'
-        description: 'HLS Playback URL for livestreaming from Wowza'
-      wowzaLivestreamState:
-        type: 'string'
+      nama:
+        type: string
+        description: Nama lagu
+      jenisAransemen:
+        type: string
         enum:
-          - starting
-          - stopping
-          - started
-          - stopped
-          - resetting
-        description: The state of the live stream.
-      wowzaFastlyId:
-        type: 'string'
-        description: 'The Fastly stream ID from the stream target playback_url,
-          used for generating Token Authentication'
-      wowzaAspectRatioWidth:
-        default: '1920'
-        type: 'integer'
-        description: 'Width aspect ratio for the video source.'
-      wowzaAspectRatioHeight:
-        default: '1080'
-        type: 'integer'
-        description: 'Heigth aspect ratio for the video source.'
-      wowzaLivestreamServerUrl:
-        type: 'string'
-        description: 'Primary server to connect source to Wowza Streaming Cloud.
-          The url is in rtmp protocol'
-      wowzaLivestreamServerPort:
-        type: 'string'
-        description: 'A port for configure your source to connect to Wowza Streaming Cloud'
-      wowzaLivestreamStreamName:
-        type: 'string'
-        description: 'A stream name for connecting to Wowza Streaming Cloud'
-      wowzaSourceUsername:
-        type: 'string'
-        description: 'Username for configure authentication in source video'
-      wowzaSourcePassword:
-        type: 'string'
-        description: 'Password for configure authentication in source video'
-      wowzaPlayerUrl:
-        type: 'string'
-        description: 'Player URL that hosted by Wowza Streaming Cloud'
-      urlAccess:
-        type: 'string'
-        description: 'Youtube Playback URL for alternative playback'
+          [
+            Aransemen ISO,
+            Aransemen Non-ISO,
+            Komposisi ISO,
+            Komposisi Non-ISO,
+            Job,
+          ]
+        description: Jenis aransemen ISO
+      klasik:
+        type: boolean
+        description: Penanda musik ini klasik atau tidak
+      instrumen:
+        type: string
+        description: Kode aransemen dari musik itu sendiri, contohnya Gp (gitar - perkusi) , GP (gitar - piano), S (string)
+
+  GetSongResponse:
+    type: object
+    properties:
+      docs:
+        description: Song array
+        type: array
+        items:
+          $ref: '#/definitions/Song'
+      total:
+        type: integer
+        description: Total number of result items
+      limit:
+        type: integer
+        description: Total number of items per page
+
+  RegisterResponse:
+    type: 'object'
+    properties:
+      status:
+        description: 'Status Response'
+        type: integer
+      message:
+        type: string
+        description: 'Successful Register Response'
+      info:
+        type: object
+        properties:
+          username:
+            type: string
+            description: 'Registered user username'
+          email:
+            type: string
+            description: 'Registered user email'
+  LogoutResponse:
+    type: 'object'
+    properties:
+      status:
+        description: 'Status Response'
+        type: integer
+      message:
+        type: string
+        description: 'Successful Logout Response'
+  LoginResponse:
+    type: 'object'
+    properties:
+      status:
+        description: 'Status Response'
+        type: integer
+      auth:
+        type: 'boolean'
+        description: 'Is login successful or not'
+      username:
+        type: string
+        description: 'Logged in username'
+  # The schema of Event
+  CredentialErrorResponse:
+    type: 'object'
+    properties:
+      status:
+        description: 'Error status response'
+        type: integer
+      message:
+        type: string
+        description: 'Error message'
